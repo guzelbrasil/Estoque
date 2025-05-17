@@ -1,23 +1,30 @@
-body {
-  font-family: Arial, sans-serif;
+/* Reset básico */
+* {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  background-color: #f4f4f4;
 }
 
-.container {
-  width: 90%;
-  max-width: 1200px;
-  margin: auto;
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
   padding: 20px;
+}
+
+/* Container principal */
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
   background-color: #fff;
   border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
+/* Cabeçalho */
 header {
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
 }
 
 .logo {
@@ -30,52 +37,55 @@ header {
   color: #555;
 }
 
+/* Título das categorias */
 .categoria-titulo {
+  font-size: 22px;
   text-align: center;
-  font-size: 24px;
-  margin: 40px 0 20px;
-  width: 100%;
+  margin: 30px 0 20px;
 }
 
+/* Layout de duas colunas */
 .categoria {
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
+  justify-content: space-between;
 }
 
 .item {
+  width: 48%;
   display: flex;
   flex-direction: column;
-  width: 48%;
 }
 
 .item label {
   margin-bottom: 5px;
+  font-weight: bold;
 }
 
 .item input {
-  padding: 6px;
-  margin-bottom: 10px;
+  padding: 8px;
   font-size: 16px;
-  width: 100%;
+  margin-bottom: 10px;
 }
 
+/* Controles de quantidade */
 .quantidade {
   display: flex;
   justify-content: center;
-  gap: 10px;
   align-items: center;
+  gap: 10px;
 }
 
-button {
+.quantidade button {
   padding: 5px 10px;
-  font-size: 16px;
-  cursor: pointer;
+  font-size: 18px;
   background-color: #ddd;
   border: none;
   border-radius: 5px;
+  cursor: pointer;
 }
 
-button:hover {
+.quantidade button:hover {
   background-color: #bbb;
 }
