@@ -7,119 +7,138 @@
 
 /* Corpo */
 body {
-  font-family: Arial, sans-serif;
-  background-color: #f4f4f4;
-  margin: 0;
-  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #e9f0ec;
+  color: #333;
 }
 
+/* Container principal */
 .container {
   max-width: 960px;
-  margin: 30px auto;
-  padding: 20px;
+  margin: 40px auto;
+  padding: 30px;
   background-color: #fff;
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 16px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
 }
 
+/* Cabeçalho */
 header {
   text-align: center;
-  margin-bottom: 30px;
+  margin-bottom: 40px;
 }
 
 .logo {
   font-size: 36px;
   font-weight: bold;
+  color: #2e7d32;
 }
 
 .titulo {
   font-size: 20px;
   color: #666;
+  margin-top: 8px;
 }
 
+/* Título das categorias */
 .categoria-titulo {
-  font-size: 22px;
+  font-size: 24px;
   font-weight: bold;
-  margin: 25px 0 10px;
+  margin: 35px 0 15px;
   text-align: left;
-  border-bottom: 1px solid #ddd;
-  padding-bottom: 5px;
+  border-bottom: 2px solid #c8e6c9;
+  padding-bottom: 8px;
+  color: #4caf50;
 }
 
+/* Grid de itens */
 .categoria {
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
 }
 
+/* Cartões de itens */
 .item {
   flex: 1 1 45%;
-  background: #f9f9f9;
+  background: #f5f5f5;
   border: 1px solid #ddd;
-  padding: 10px;
-  border-radius: 6px;
+  padding: 16px;
+  border-radius: 12px;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 10px;
+  transition: box-shadow 0.2s;
+}
+
+.item:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .item label {
   font-weight: bold;
+  color: #333;
 }
 
 .quantidade {
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  gap: 10px;
+  gap: 12px;
 }
 
 .quantidade span {
   font-size: 18px;
   min-width: 30px;
   text-align: center;
+  color: #444;
 }
 
+/* Botões padrão */
 button {
   background-color: #ddd;
   border: none;
   padding: 6px 12px;
   font-size: 16px;
-  border-radius: 4px;
+  border-radius: 6px;
   cursor: pointer;
+  transition: background-color 0.2s;
 }
 
 button:hover {
   background-color: #bbb;
 }
 
-/* Estilo para os botões "Salvar" */
+/* Botão "Salvar" */
 .salvar-btn {
   background-color: #4caf50;
   color: white;
-  padding: 6px 12px;
-  font-size: 14px;
+  padding: 6px 14px;
+  font-size: 15px;
+  font-weight: bold;
   border: none;
-  border-radius: 4px;
+  border-radius: 6px;
   cursor: pointer;
   align-self: flex-start;
+  transition: background-color 0.2s;
 }
 
 .salvar-btn:hover {
   background-color: #45a049;
 }
 
-/* Estilo para os botões "Salvar Tudo" e "Zerar Tudo" */
+/* Botões "Salvar Tudo" e "Zerar Tudo" */
 .salvar-tudo,
 .zerar-tudo {
   background-color: #2196f3;
   color: white;
-  padding: 8px 16px;
+  padding: 10px 20px;
   font-size: 16px;
   border: none;
-  border-radius: 4px;
+  border-radius: 6px;
   cursor: pointer;
-  margin-top: 20px;
+  margin-top: 30px;
+  transition: background-color 0.2s;
 }
 
 .salvar-tudo:hover,
