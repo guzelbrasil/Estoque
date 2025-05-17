@@ -5,63 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Estoque - Guzel</title>
   <link rel="stylesheet" href="style.css" />
-  <style>
-    /* Adicionando estilo para duas colunas */
-    .categoria {
-      margin-bottom: 30px;
-    }
-
-    .categoria h3 {
-      text-align: center;
-      font-size: 24px;
-      margin-bottom: 20px;
-    }
-
-    .categoria .item {
-      flex: 1 1 45%; /* Ocupa 45% do espaço, permitindo 2 colunas */
-      box-sizing: border-box;
-      margin-bottom: 15px;
-    }
-
-    .categoria .item input {
-      width: 100%;
-      padding: 5px;
-      font-size: 16px;
-    }
-
-    .quantidade {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      justify-content: center;
-    }
-
-    .decrementar,
-    .incrementar {
-      padding: 5px 10px;
-      font-size: 16px;
-      cursor: pointer;
-      background-color: #ddd;
-      border: none;
-      border-radius: 5px;
-    }
-
-    .decrementar:hover,
-    .incrementar:hover {
-      background-color: #bbb;
-    }
-
-    .categoria {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 20px;
-      justify-content: space-between;
-    }
-
-    .item {
-      width: 48%; /* Ajuste para garantir 2 colunas */
-    }
-  </style>
 </head>
 <body>
   <div class="container">
@@ -71,187 +14,100 @@
     </header>
 
     <!-- TINTAS -->
-    <section class="categoria">
-      <h3>Tintas</h3>
-      <div class="item">
-        <label for="ciano">CIANO:</label>
-        <input type="text" id="ciano" name="ciano">
-        <div class="quantidade">
-          <button class="decrementar" onclick="alterarQuantidade('ciano', -1)">-</button>
-          <span id="quantidade-ciano">0</span>
-          <button class="incrementar" onclick="alterarQuantidade('ciano', 1)">+</button>
+    <section>
+      <h3 class="categoria-titulo">Tintas</h3>
+      <div class="categoria">
+        <div class="item">
+          <label for="ciano">CIANO:</label>
+          <input type="text" id="ciano" />
+          <div class="quantidade">
+            <button onclick="alterarQuantidade('ciano', -1)">-</button>
+            <span id="quantidade-ciano">0</span>
+            <button onclick="alterarQuantidade('ciano', 1)">+</button>
+          </div>
         </div>
-      </div>
-      <div class="item">
-        <label for="magenta">MAGENTA:</label>
-        <input type="text" id="magenta" name="magenta">
-        <div class="quantidade">
-          <button class="decrementar" onclick="alterarQuantidade('magenta', -1)">-</button>
-          <span id="quantidade-magenta">0</span>
-          <button class="incrementar" onclick="alterarQuantidade('magenta', 1)">+</button>
+        <div class="item">
+          <label for="magenta">MAGENTA:</label>
+          <input type="text" id="magenta" />
+          <div class="quantidade">
+            <button onclick="alterarQuantidade('magenta', -1)">-</button>
+            <span id="quantidade-magenta">0</span>
+            <button onclick="alterarQuantidade('magenta', 1)">+</button>
+          </div>
         </div>
-      </div>
-      <div class="item">
-        <label for="amarelo">AMARELO:</label>
-        <input type="text" id="amarelo" name="amarelo">
-        <div class="quantidade">
-          <button class="decrementar" onclick="alterarQuantidade('amarelo', -1)">-</button>
-          <span id="quantidade-amarelo">0</span>
-          <button class="incrementar" onclick="alterarQuantidade('amarelo', 1)">+</button>
+        <div class="item">
+          <label for="amarelo">AMARELO:</label>
+          <input type="text" id="amarelo" />
+          <div class="quantidade">
+            <button onclick="alterarQuantidade('amarelo', -1)">-</button>
+            <span id="quantidade-amarelo">0</span>
+            <button onclick="alterarQuantidade('amarelo', 1)">+</button>
+          </div>
         </div>
-      </div>
-      <div class="item">
-        <label for="preto">PRETO:</label>
-        <input type="text" id="preto" name="preto">
-        <div class="quantidade">
-          <button class="decrementar" onclick="alterarQuantidade('preto', -1)">-</button>
-          <span id="quantidade-preto">0</span>
-          <button class="incrementar" onclick="alterarQuantidade('preto', 1)">+</button>
+        <div class="item">
+          <label for="preto">PRETO:</label>
+          <input type="text" id="preto" />
+          <div class="quantidade">
+            <button onclick="alterarQuantidade('preto', -1)">-</button>
+            <span id="quantidade-preto">0</span>
+            <button onclick="alterarQuantidade('preto', 1)">+</button>
+          </div>
         </div>
       </div>
     </section>
 
     <!-- PAPÉIS -->
-    <section class="categoria">
-      <h3>Papéis</h3>
-      <div class="item">
-        <label>COLDENHOVE 1,80:</label>
-        <input type="text" />
-      </div>
-      <div class="item">
-        <label>CONDENHOVE 1,60:</label>
-        <input type="text" />
-      </div>
-      <div class="item">
-        <label>SEDA 60g:</label>
-        <input type="text" />
-      </div>
-      <div class="item">
-        <label>SEDA 40g:</label>
-        <input type="text" />
-      </div>
-      <div class="item">
-        <label>KRAFT 1,80:</label>
-        <input type="text" />
-      </div>
-      <div class="item">
-        <label>KRAFT 1,60:</label>
-        <input type="text" />
+    <section>
+      <h3 class="categoria-titulo">Papéis</h3>
+      <div class="categoria">
+        <div class="item"><label>COLDENHOVE 1,80:</label><input type="text" /></div>
+        <div class="item"><label>CONDENHOVE 1,60:</label><input type="text" /></div>
+        <div class="item"><label>SEDA 60g:</label><input type="text" /></div>
+        <div class="item"><label>SEDA 40g:</label><input type="text" /></div>
+        <div class="item"><label>KRAFT 1,80:</label><input type="text" /></div>
+        <div class="item"><label>KRAFT 1,60:</label><input type="text" /></div>
       </div>
     </section>
 
     <!-- MALHAS -->
-    <section class="categoria">
-      <h3>Malhas</h3>
-      <div class="item">
-        <label>HELANCA:</label>
-        <input type="text" />
-      </div>
-      <div class="item">
-        <label>DRY 180 PLUS EF:</label>
-        <input type="text" />
-      </div>
-      <div class="item">
-        <label>DRY 180 EF:</label>
-        <input type="text" />
-      </div>
-      <div class="item">
-        <label>DRY SOFT:</label>
-        <input type="text" />
-      </div>
-      <div class="item">
-        <label>DRY FLEX UV:</label>
-        <input type="text" />
-      </div>
-      <div class="item">
-        <label>JIMP DRY LARGE:</label>
-        <input type="text" />
-      </div>
-      <div class="item">
-        <label>JIMP DRY:</label>
-        <input type="text" />
-      </div>
-      <div class="item">
-        <label>MANCHESTER:</label>
-        <input type="text" />
-      </div>
-      <div class="item">
-        <label>ABSTRACT:</label>
-        <input type="text" />
-      </div>
-      <div class="item">
-        <label>ACTION:</label>
-        <input type="text" />
-      </div>
-      <div class="item">
-        <label>EURO:</label>
-        <input type="text" />
-      </div>
-      <div class="item">
-        <label>CHIMPA:</label>
-        <input type="text" />
-      </div>
-      <div class="item">
-        <label>HELANCA FLANELADA:</label>
-        <input type="text" />
-      </div>
-      <div class="item">
-        <label>DRY UV:</label>
-        <input type="text" />
-      </div>
-      <div class="item">
-        <label>DRY 100:</label>
-        <input type="text" />
-      </div>
-      <div class="item">
-        <label>GABARDINE:</label>
-        <input type="text" />
-      </div>
-      <div class="item">
-        <label>FURADINHO:</label>
-        <input type="text" />
-      </div>
-      <div class="item">
-        <label>NBA:</label>
-        <input type="text" />
-      </div>
-      <div class="item">
-        <label>NBA (FURADINHO):</label>
-        <input type="text" />
-      </div>
-      <div class="item">
-        <label>OXFORD:</label>
-        <input type="text" />
-      </div>
-      <div class="item">
-        <label>OXFORDINE:</label>
-        <input type="text" />
-      </div>
-      <div class="item">
-        <label>QUADRADINHO:</label>
-        <input type="text" />
-      </div>
-      <div class="item">
-        <label>TECTEL:</label>
-        <input type="text" />
-      </div>
-      <div class="item">
-        <label>BORA-BORA:</label>
-        <input type="text" />
-      </div>
-      <div class="item">
-        <label>PP 100% POLY:</label>
-        <input type="text" />
+    <section>
+      <h3 class="categoria-titulo">Malhas</h3>
+      <div class="categoria">
+        <div class="item"><label>HELANCA:</label><input type="text" /></div>
+        <div class="item"><label>DRY 180 PLUS EF:</label><input type="text" /></div>
+        <div class="item"><label>DRY 180 EF:</label><input type="text" /></div>
+        <div class="item"><label>DRY SOFT:</label><input type="text" /></div>
+        <div class="item"><label>DRY FLEX UV:</label><input type="text" /></div>
+        <div class="item"><label>JIMP DRY LARGE:</label><input type="text" /></div>
+        <div class="item"><label>JIMP DRY:</label><input type="text" /></div>
+        <div class="item"><label>MANCHESTER:</label><input type="text" /></div>
+        <div class="item"><label>ABSTRACT:</label><input type="text" /></div>
+        <div class="item"><label>ACTION:</label><input type="text" /></div>
+        <div class="item"><label>EURO:</label><input type="text" /></div>
+        <div class="item"><label>CHIMPA:</label><input type="text" /></div>
+        <div class="item"><label>HELANCA FLANELADA:</label><input type="text" /></div>
+        <div class="item"><label>DRY UV:</label><input type="text" /></div>
+        <div class="item"><label>DRY 100:</label><input type="text" /></div>
+        <div class="item"><label>GABARDINE:</label><input type="text" /></div>
+        <div class="item"><label>FURADINHO:</label><input type="text" /></div>
+        <div class="item"><label>NBA:</label><input type="text" /></div>
+        <div class="item"><label>NBA (FURADINHO):</label><input type="text" /></div>
+        <div class="item"><label>OXFORD:</label><input type="text" /></div>
+        <div class="item"><label>OXFORDINE:</label><input type="text" /></div>
+        <div class="item"><label>QUADRADINHO:</label><input type="text" /></div>
+        <div class="item"><label>TECTEL:</label><input type="text" /></div>
+        <div class="item"><label>BORA-BORA:</label><input type="text" /></div>
+        <div class="item"><label>PP 100% POLY:</label><input type="text" /></div>
       </div>
     </section>
   </div>
 
   <script>
-    // Função para aumentar ou diminuir a quantidade
-    function alterarQuantidade(item, valor) {
-      var quantidadeElemento = document.getElementById('quantidade-' + item);
-      var quantidadeAtual = parseInt(quantidadeElemento.innerText);
-      quantidadeElemento.innerText = quantidadeAtual + valor;
+    function alterarQuantidade(item, incremento) {
+      const quantidadeElemento = document.getElementById(`quantidade-${item}`);
+      let quantidade = parseInt(quantidadeElemento.textContent);
+      quantidade = Math.max(0, quantidade + incremento);
+      quantidadeElemento.textContent = quantidade;
     }
   </script>
 </body>
