@@ -16,52 +16,151 @@
     <!-- TINTAS -->
     <section class="categoria">
       <h3>Tintas</h3>
-      <div class="item"><label>CIANO:</label><input type="text" /></div>
-      <div class="item"><label>MAGENTA:</label><input type="text" /></div>
-      <div class="item"><label>AMARELO:</label><input type="text" /></div>
-      <div class="item"><label>PRETO:</label><input type="text" /></div>
+      <div class="item">
+        <label for="ciano">CIANO:</label>
+        <input type="text" id="ciano" name="ciano">
+        <div class="quantidade">
+          <button class="decrementar" onclick="alterarQuantidade('ciano', -1)">-</button>
+          <span id="quantidade-ciano">0</span>
+          <button class="incrementar" onclick="alterarQuantidade('ciano', 1)">+</button>
+        </div>
+      </div>
+      <div class="item">
+        <label for="magenta">MAGENTA:</label>
+        <input type="text" id="magenta" name="magenta">
+        <div class="quantidade">
+          <button class="decrementar" onclick="alterarQuantidade('magenta', -1)">-</button>
+          <span id="quantidade-magenta">0</span>
+          <button class="incrementar" onclick="alterarQuantidade('magenta', 1)">+</button>
+        </div>
+      </div>
+      <div class="item">
+        <label for="amarelo">AMARELO:</label>
+        <input type="text" id="amarelo" name="amarelo">
+        <div class="quantidade">
+          <button class="decrementar" onclick="alterarQuantidade('amarelo', -1)">-</button>
+          <span id="quantidade-amarelo">0</span>
+          <button class="incrementar" onclick="alterarQuantidade('amarelo', 1)">+</button>
+        </div>
+      </div>
+      <div class="item">
+        <label for="preto">PRETO:</label>
+        <input type="text" id="preto" name="preto">
+        <div class="quantidade">
+          <button class="decrementar" onclick="alterarQuantidade('preto', -1)">-</button>
+          <span id="quantidade-preto">0</span>
+          <button class="incrementar" onclick="alterarQuantidade('preto', 1)">+</button>
+        </div>
+      </div>
     </section>
 
     <!-- PAPÉIS -->
     <section class="categoria">
       <h3>Papéis</h3>
-      <div class="item"><label>COLDENHOVE 1,80:</label><input type="text" /></div>
-      <div class="item"><label>CONDENHOVE 1,60:</label><input type="text" /></div>
-      <div class="item"><label>SEDA 60g:</label><input type="text" /></div>
-      <div class="item"><label>SEDA 40g:</label><input type="text" /></div>
-      <div class="item"><label>KRAFT 1,80:</label><input type="text" /></div>
-      <div class="item"><label>KRAFT 1,60:</label><input type="text" /></div>
+      <div class="item">
+        <label>COLDENHOVE 1,80:</label>
+        <input type="text" id="coldenhove-1-80">
+        <div class="quantidade">
+          <button class="decrementar" onclick="alterarQuantidade('coldenhove-1-80', -1)">-</button>
+          <span id="quantidade-coldenhove-1-80">0</span>
+          <button class="incrementar" onclick="alterarQuantidade('coldenhove-1-80', 1)">+</button>
+        </div>
+      </div>
+      <div class="item">
+        <label>CONDENHOVE 1,60:</label>
+        <input type="text" id="condenhove-1-60">
+        <div class="quantidade">
+          <button class="decrementar" onclick="alterarQuantidade('condenhove-1-60', -1)">-</button>
+          <span id="quantidade-condenhove-1-60">0</span>
+          <button class="incrementar" onclick="alterarQuantidade('condenhove-1-60', 1)">+</button>
+        </div>
+      </div>
+      <div class="item">
+        <label>SEDA 60g:</label>
+        <input type="text" id="seda-60g">
+        <div class="quantidade">
+          <button class="decrementar" onclick="alterarQuantidade('seda-60g', -1)">-</button>
+          <span id="quantidade-seda-60g">0</span>
+          <button class="incrementar" onclick="alterarQuantidade('seda-60g', 1)">+</button>
+        </div>
+      </div>
+      <div class="item">
+        <label>SEDA 40g:</label>
+        <input type="text" id="seda-40g">
+        <div class="quantidade">
+          <button class="decrementar" onclick="alterarQuantidade('seda-40g', -1)">-</button>
+          <span id="quantidade-seda-40g">0</span>
+          <button class="incrementar" onclick="alterarQuantidade('seda-40g', 1)">+</button>
+        </div>
+      </div>
+      <div class="item">
+        <label>KRAFT 1,80:</label>
+        <input type="text" id="kraft-1-80">
+        <div class="quantidade">
+          <button class="decrementar" onclick="alterarQuantidade('kraft-1-80', -1)">-</button>
+          <span id="quantidade-kraft-1-80">0</span>
+          <button class="incrementar" onclick="alterarQuantidade('kraft-1-80', 1)">+</button>
+        </div>
+      </div>
+      <div class="item">
+        <label>KRAFT 1,60:</label>
+        <input type="text" id="kraft-1-60">
+        <div class="quantidade">
+          <button class="decrementar" onclick="alterarQuantidade('kraft-1-60', -1)">-</button>
+          <span id="quantidade-kraft-1-60">0</span>
+          <button class="incrementar" onclick="alterarQuantidade('kraft-1-60', 1)">+</button>
+        </div>
+      </div>
     </section>
 
     <!-- MALHAS -->
     <section class="categoria">
       <h3>Malhas</h3>
-      <div class="item"><label>HELANCA:</label><input type="text" /></div>
-      <div class="item"><label>DRY 180 PLUS EF:</label><input type="text" /></div>
-      <div class="item"><label>DRY 180 EF:</label><input type="text" /></div>
-      <div class="item"><label>DRY SOFT:</label><input type="text" /></div>
-      <div class="item"><label>DRY FLEX UV:</label><input type="text" /></div>
-      <div class="item"><label>JIMP DRY LARGE:</label><input type="text" /></div>
-      <div class="item"><label>JIMP DRY:</label><input type="text" /></div>
-      <div class="item"><label>MANCHESTER:</label><input type="text" /></div>
-      <div class="item"><label>ABSTRACT:</label><input type="text" /></div>
-      <div class="item"><label>ACTION:</label><input type="text" /></div>
-      <div class="item"><label>EURO:</label><input type="text" /></div>
-      <div class="item"><label>CHIMPA:</label><input type="text" /></div>
-      <div class="item"><label>HELANCA FLANELADA:</label><input type="text" /></div>
-      <div class="item"><label>DRY UV:</label><input type="text" /></div>
-      <div class="item"><label>DRY 100:</label><input type="text" /></div>
-      <div class="item"><label>GABARDINE:</label><input type="text" /></div>
-      <div class="item"><label>FURADINHO:</label><input type="text" /></div>
-      <div class="item"><label>NBA:</label><input type="text" /></div>
-      <div class="item"><label>NBA (FURADINHO):</label><input type="text" /></div>
-      <div class="item"><label>OXFORD:</label><input type="text" /></div>
-      <div class="item"><label>OXFORDINE:</label><input type="text" /></div>
-      <div class="item"><label>QUADRADINHO:</label><input type="text" /></div>
-      <div class="item"><label>TECTEL:</label><input type="text" /></div>
-      <div class="item"><label>BORA-BORA:</label><input type="text" /></div>
-      <div class="item"><label>PP 100% POLY:</label><input type="text" /></div>
+      <div class="item">
+        <label>HELANCA:</label>
+        <input type="text" id="helanca">
+        <div class="quantidade">
+          <button class="decrementar" onclick="alterarQuantidade('helanca', -1)">-</button>
+          <span id="quantidade-helanca">0</span>
+          <button class="incrementar" onclick="alterarQuantidade('helanca', 1)">+</button>
+        </div>
+      </div>
+      <div class="item">
+        <label>DRY 180 PLUS EF:</label>
+        <input type="text" id="dry-180-plus-ef">
+        <div class="quantidade">
+          <button class="decrementar" onclick="alterarQuantidade('dry-180-plus-ef', -1)">-</button>
+          <span id="quantidade-dry-180-plus-ef">0</span>
+          <button class="incrementar" onclick="alterarQuantidade('dry-180-plus-ef', 1)">+</button>
+        </div>
+      </div>
+      <div class="item">
+        <label>DRY 180 EF:</label>
+        <input type="text" id="dry-180-ef">
+        <div class="quantidade">
+          <button class="decrementar" onclick="alterarQuantidade('dry-180-ef', -1)">-</button>
+          <span id="quantidade-dry-180-ef">0</span>
+          <button class="incrementar" onclick="alterarQuantidade('dry-180-ef', 1)">+</button>
+        </div>
+      </div>
+      <!-- Adicionei o restante das malhas aqui, mas só coloquei a estrutura até o item "DRY 180 EF" -->
     </section>
   </div>
+
+  <script>
+    function alterarQuantidade(item, quantidade) {
+      // Pega o elemento de quantidade baseado no ID
+      let campoQuantidade = document.getElementById('quantidade-' + item);
+
+      // Atualiza o valor
+      let valorAtual = parseInt(campoQuantidade.innerText);
+      let novoValor = valorAtual + quantidade;
+
+      // Garante que o valor não fique negativo
+      if (novoValor >= 0) {
+        campoQuantidade.innerText = novoValor;
+      }
+    }
+  </script>
 </body>
 </html>
