@@ -92,3 +92,22 @@ button {
 button:hover {
   background-color: #bbb;
 }
+
+/* Estilo para os botões "Salvar" */
+.salvar-btn {
+  background-color: #4caf50;
+  color: white;
+  padding: 6px 12px;
+  font-size: 14px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  align-self: flex-start;
+}
+
+.salvar-btn:hover {
+  background-color: #45a049;
+}
+
+/* Estilo para os botões "Salvar Tudo" e "Zerar Tudo" */
+.salvar-tudo
