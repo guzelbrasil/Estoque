@@ -1,0 +1,128 @@
+/* Resetando margens e padding */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Estilos Gerais */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f9f9f9;
+  color: #333;
+  padding: 20px;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+h1.logo {
+  font-size: 3rem;
+  color: #00a86b;
+  font-weight: bold;
+}
+
+h2.titulo {
+  font-size: 2rem;
+  color: #333;
+  margin-top: 10px;
+}
+
+h3 {
+  font-size: 1.5rem;
+  margin: 20px 0;
+  color: #444;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border-bottom: 2px solid #00a86b;
+  padding-bottom: 5px;
+}
+
+.categoria {
+  margin-bottom: 30px;
+}
+
+.item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+  align-items: center;
+}
+
+label {
+  font-size: 1rem;
+  color: #555;
+  flex-basis: 30%;
+}
+
+input {
+  flex-grow: 1;
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  outline: none;
+}
+
+input:focus {
+  border-color: #00a86b;
+}
+
+/* Estilos Responsivos */
+@media (max-width: 768px) {
+  .container {
+    padding: 20px;
+  }
+
+  .item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  label {
+    margin-bottom: 5px;
+    font-size: 0.9rem;
+  }
+
+  input {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  h1.logo {
+    font-size: 2.5rem;
+  }
+
+  h2.titulo {
+    font-size: 1.8rem;
+  }
+
+  h3 {
+    font-size: 1.3rem;
+  }
+
+  .item {
+    margin-bottom: 12px;
+  }
+
+  label {
+    font-size: 0.9rem;
+  }
+
+  input {
+    font-size: 0.9rem;
+  }
+}
