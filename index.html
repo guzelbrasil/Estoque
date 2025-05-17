@@ -17,42 +17,10 @@
     <section>
       <h3 class="categoria-titulo">Tintas</h3>
       <div class="categoria">
-        <div class="item">
-          <label for="ciano">CIANO:</label>
-          <input type="text" id="ciano" />
-          <div class="quantidade">
-            <button onclick="alterarQuantidade('ciano', -1)">-</button>
-            <span id="quantidade-ciano">0</span>
-            <button onclick="alterarQuantidade('ciano', 1)">+</button>
-          </div>
-        </div>
-        <div class="item">
-          <label for="magenta">MAGENTA:</label>
-          <input type="text" id="magenta" />
-          <div class="quantidade">
-            <button onclick="alterarQuantidade('magenta', -1)">-</button>
-            <span id="quantidade-magenta">0</span>
-            <button onclick="alterarQuantidade('magenta', 1)">+</button>
-          </div>
-        </div>
-        <div class="item">
-          <label for="amarelo">AMARELO:</label>
-          <input type="text" id="amarelo" />
-          <div class="quantidade">
-            <button onclick="alterarQuantidade('amarelo', -1)">-</button>
-            <span id="quantidade-amarelo">0</span>
-            <button onclick="alterarQuantidade('amarelo', 1)">+</button>
-          </div>
-        </div>
-        <div class="item">
-          <label for="preto">PRETO:</label>
-          <input type="text" id="preto" />
-          <div class="quantidade">
-            <button onclick="alterarQuantidade('preto', -1)">-</button>
-            <span id="quantidade-preto">0</span>
-            <button onclick="alterarQuantidade('preto', 1)">+</button>
-          </div>
-        </div>
+        <div class="item" data-item="ciano">CIANO</div>
+        <div class="item" data-item="magenta">MAGENTA</div>
+        <div class="item" data-item="amarelo">AMARELO</div>
+        <div class="item" data-item="preto">PRETO</div>
       </div>
     </section>
 
@@ -60,12 +28,12 @@
     <section>
       <h3 class="categoria-titulo">Papéis</h3>
       <div class="categoria">
-        <div class="item"><label>COLDENHOVE 1,80:</label><input type="text" /></div>
-        <div class="item"><label>CONDENHOVE 1,60:</label><input type="text" /></div>
-        <div class="item"><label>SEDA 60g:</label><input type="text" /></div>
-        <div class="item"><label>SEDA 40g:</label><input type="text" /></div>
-        <div class="item"><label>KRAFT 1,80:</label><input type="text" /></div>
-        <div class="item"><label>KRAFT 1,60:</label><input type="text" /></div>
+        <div class="item" data-item="colden180">COLDENHOVE 1,80</div>
+        <div class="item" data-item="colden160">CONDENHOVE 1,60</div>
+        <div class="item" data-item="seda60">SEDA 60g</div>
+        <div class="item" data-item="seda40">SEDA 40g</div>
+        <div class="item" data-item="kraft180">KRAFT 1,80</div>
+        <div class="item" data-item="kraft160">KRAFT 1,60</div>
       </div>
     </section>
 
@@ -73,36 +41,50 @@
     <section>
       <h3 class="categoria-titulo">Malhas</h3>
       <div class="categoria">
-        <div class="item"><label>HELANCA:</label><input type="text" /></div>
-        <div class="item"><label>DRY 180 PLUS EF:</label><input type="text" /></div>
-        <div class="item"><label>DRY 180 EF:</label><input type="text" /></div>
-        <div class="item"><label>DRY SOFT:</label><input type="text" /></div>
-        <div class="item"><label>DRY FLEX UV:</label><input type="text" /></div>
-        <div class="item"><label>JIMP DRY LARGE:</label><input type="text" /></div>
-        <div class="item"><label>JIMP DRY:</label><input type="text" /></div>
-        <div class="item"><label>MANCHESTER:</label><input type="text" /></div>
-        <div class="item"><label>ABSTRACT:</label><input type="text" /></div>
-        <div class="item"><label>ACTION:</label><input type="text" /></div>
-        <div class="item"><label>EURO:</label><input type="text" /></div>
-        <div class="item"><label>CHIMPA:</label><input type="text" /></div>
-        <div class="item"><label>HELANCA FLANELADA:</label><input type="text" /></div>
-        <div class="item"><label>DRY UV:</label><input type="text" /></div>
-        <div class="item"><label>DRY 100:</label><input type="text" /></div>
-        <div class="item"><label>GABARDINE:</label><input type="text" /></div>
-        <div class="item"><label>FURADINHO:</label><input type="text" /></div>
-        <div class="item"><label>NBA:</label><input type="text" /></div>
-        <div class="item"><label>NBA (FURADINHO):</label><input type="text" /></div>
-        <div class="item"><label>OXFORD:</label><input type="text" /></div>
-        <div class="item"><label>OXFORDINE:</label><input type="text" /></div>
-        <div class="item"><label>QUADRADINHO:</label><input type="text" /></div>
-        <div class="item"><label>TECTEL:</label><input type="text" /></div>
-        <div class="item"><label>BORA-BORA:</label><input type="text" /></div>
-        <div class="item"><label>PP 100% POLY:</label><input type="text" /></div>
+        <div class="item" data-item="helanca">HELANCA</div>
+        <div class="item" data-item="dry180plus">DRY 180 PLUS EF</div>
+        <div class="item" data-item="dry180">DRY 180 EF</div>
+        <div class="item" data-item="drysoft">DRY SOFT</div>
+        <div class="item" data-item="dryflex">DRY FLEX UV</div>
+        <div class="item" data-item="jimpylarge">JIMP DRY LARGE</div>
+        <div class="item" data-item="jimpdry">JIMP DRY</div>
+        <div class="item" data-item="manchester">MANCHESTER</div>
+        <div class="item" data-item="abstract">ABSTRACT</div>
+        <div class="item" data-item="action">ACTION</div>
+        <div class="item" data-item="euro">EURO</div>
+        <div class="item" data-item="chimpa">CHIMPA</div>
+        <div class="item" data-item="helancaflan">HELANCA FLANELADA</div>
+        <div class="item" data-item="dryuv">DRY UV</div>
+        <div class="item" data-item="dry100">DRY 100</div>
+        <div class="item" data-item="gabardine">GABARDINE</div>
+        <div class="item" data-item="furadinho">FURADINHO</div>
+        <div class="item" data-item="nba">NBA</div>
+        <div class="item" data-item="nbafuradinho">NBA (FURADINHO)</div>
+        <div class="item" data-item="oxford">OXFORD</div>
+        <div class="item" data-item="oxfordine">OXFORDINE</div>
+        <div class="item" data-item="quadradinho">QUADRADINHO</div>
+        <div class="item" data-item="tectel">TECTEL</div>
+        <div class="item" data-item="borabora">BORA-BORA</div>
+        <div class="item" data-item="pppoly">PP 100% POLY</div>
       </div>
     </section>
   </div>
 
   <script>
+    document.querySelectorAll('.item').forEach(item => {
+      const nome = item.textContent.trim();
+      const id = item.getAttribute('data-item');
+
+      item.innerHTML = `
+        <label for="${id}">${nome}</label>
+        <div class="quantidade">
+          <button onclick="alterarQuantidade('${id}', -1)">-</button>
+          <span id="quantidade-${id}">0</span>
+          <button onclick="alterarQuantidade('${id}', 1)">+</button>
+        </div>
+      `;
+    });
+
     function alterarQuantidade(item, incremento) {
       const quantidadeElemento = document.getElementById(`quantidade-${item}`);
       let quantidade = parseInt(quantidadeElemento.textContent);
@@ -112,3 +94,105 @@
   </script>
 </body>
 </html>
+🎨 Novo style.css:
+css
+Copiar
+Editar
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Corpo */
+body {
+  font-family: "Segoe UI", sans-serif;
+  background-color: #f0f2f5;
+  padding: 20px;
+}
+
+/* Container principal */
+.container {
+  max-width: 1000px;
+  margin: auto;
+  background-color: #ffffff;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Cabeçalho */
+header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.logo {
+  font-size: 36px;
+  font-weight: bold;
+  color: #333;
+}
+
+.titulo {
+  font-size: 22px;
+  color: #666;
+}
+
+/* Título das seções */
+.categoria-titulo {
+  font-size: 20px;
+  margin-bottom: 15px;
+  color: #222;
+  text-align: left;
+  border-left: 4px solid #007bff;
+  padding-left: 10px;
+  margin-top: 40px;
+}
+
+/* Itens */
+.categoria {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.item {
+  background: #fafafa;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 15px;
+  width: 48%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Quantidade */
+.quantidade {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.quantidade span {
+  font-size: 18px;
+  font-weight: bold;
+  min-width: 40px;
+  text-align: center;
+}
+
+.quantidade button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  font-size: 16px;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.quantidade button:hover {
+  background-color: #0056b3;
+}
