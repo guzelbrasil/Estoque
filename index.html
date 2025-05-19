@@ -1,50 +1,198 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Estoque Guzel - Atualização em Tempo Real</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-  <link rel="stylesheet" href="style.css" />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Controle de Estoque Guzel</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background: #f4f4f4;
+    margin: 0;
+    padding: 20px;
+  }
+  .container {
+    max-width: 900px;
+    margin: auto;
+    background: white;
+    padding: 15px 25px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  }
+  h1 {
+    text-align: center;
+    color: #333;
+  }
+  .category {
+    margin-top: 20px;
+  }
+  .category h2 {
+    background-color: #007bff;
+    color: white;
+    padding: 10px;
+    cursor: pointer;
+    user-select: none;
+    border-radius: 4px;
+  }
+  ul.items {
+    list-style: none;
+    padding-left: 20px;
+    display: none;
+  }
+  ul.items li {
+    margin-bottom: 8px;
+  }
+  input.qty-input {
+    width: 60px;
+    margin-left: 10px;
+  }
+  button.save-btn {
+    margin-top: 10px;
+    background-color: #28a745;
+    color: white;
+    border:none;
+    padding: 7px 14px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  button.save-btn:hover {
+    background-color: #218838;
+  }
+</style>
 </head>
 <body>
-  <header>
-    <h1>Estoque Guzel - Atualização em Tempo Real</h1>
-  </header>
+<div class="container">
+  <h1>Controle de Estoque Guzel</h1>
+  <div id="categories"></div>
+</div>
 
-  <main>
-    <section class="categoria" id="tintas">
-      <h2><i class="fas fa-paint-roller"></i> Tintas</h2>
-      <form id="form-tintas" class="form-categoria">
-        <ul id="lista-tintas" class="lista-estoque"></ul>
-        <button type="submit" class="btn-salvar">Salvar Tintas</button>
-      </form>
-    </section>
+<!-- Firebase scripts (compatibilidade para browsers) -->
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
 
-    <section class="categoria" id="malhas">
-      <h2><i class="fas fa-tshirt"></i> Malhas</h2>
-      <form id="form-malhas" class="form-categoria">
-        <ul id="lista-malhas" class="lista-estoque"></ul>
-        <button type="submit" class="btn-salvar">Salvar Malhas</button>
-      </form>
-    </section>
+<script>
+  // Configuração Firebase (compatível com scripts clássicos)
+  const firebaseConfig = {
+    apiKey: "AIzaSyCSObisT9tnm6TM9gzRH782YAebfTzsp2U",
+    authDomain: "estoqueguzel.firebaseapp.com",
+    databaseURL: "https://estoqueguzel-default-rtdb.firebaseio.com",
+    projectId: "estoqueguzel",
+    storageBucket: "estoqueguzel.appspot.com",
+    messagingSenderId: "933342103585",
+    appId: "1:933342103585:web:cba330f76f53821b367b60",
+    measurementId: "G-KBSGPWQG8E"
+  };
 
-    <section class="categoria" id="papeis">
-      <h2><i class="fas fa-file-alt"></i> Papéis</h2>
-      <form id="form-papeis" class="form-categoria">
-        <ul id="lista-papeis" class="lista-estoque"></ul>
-        <button type="submit" class="btn-salvar">Salvar Papéis</button>
-      </form>
-    </section>
-  </main>
+  firebase.initializeApp(firebaseConfig);
+  const database = firebase.database();
 
-  <footer>
-    <p>© 2025 Estoque Guzel - Atualização em tempo real com Firebase</p>
-  </footer>
+  // Lista completa das malhas conforme solicitado
+  const malhas = [
+    "HELANCA", "DRY 180 PLUS EF", "DRY 180 EF", "DRY SOFT", "DRY FLEX UV",
+    "JIMP DRY LARGE", "JIMP DRY", "MANCHESTER", "ABSTRACT", "ACTION", "EURO",
+    "CHIMPA", "HELANCA FLANELADA", "DRY UV EMATEX", "DRY 100 EMATEX", "GABARDINE",
+    "FURADINHO", "NBA", "NBA (FURADINHO)", "OXFORD", "OXFORDINE", "QUADRADINHO",
+    "TECTEL", "BORA-BORA", "PP 100% POLY"
+  ];
 
-  <!-- Firebase compat libs -->
-  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
-  <script src="script.js"></script>
+  // Carregar categorias (exemplo com 3 categorias: Malhas, Tintas, Papéis)
+  // Cada categoria tem um array de itens: nome e quantidade (puxado do Firebase ou zero)
+  const categories = {
+    malhas: { name: "Malhas", items: malhas },
+    tintas: { name: "Tintas", items: ["Tinta Branca", "Tinta Preta", "Tinta Azul"] },
+    papeis: { name: "Papéis", items: ["Papel Sulfite", "Papel Cartão", "Papel Aquarela"] }
+  };
+
+  // Função para criar o HTML e montar a interface
+  function montarInterface(dataFromFirebase) {
+    const container = document.getElementById("categories");
+    container.innerHTML = ""; // limpa
+
+    for (const key in categories) {
+      const cat = categories[key];
+      const divCat = document.createElement("div");
+      divCat.classList.add("category");
+
+      // Título da categoria com clique para mostrar/esconder
+      const h2 = document.createElement("h2");
+      h2.textContent = cat.name;
+      h2.onclick = () => {
+        const ul = divCat.querySelector("ul");
+        ul.style.display = (ul.style.display === "none" || ul.style.display === "") ? "block" : "none";
+      };
+      divCat.appendChild(h2);
+
+      // Lista dos itens com inputs para editar quantidade
+      const ul = document.createElement("ul");
+      ul.classList.add("items");
+      ul.style.display = "none";
+
+      cat.items.forEach(itemName => {
+        const li = document.createElement("li");
+        const span = document.createElement("span");
+        span.textContent = itemName;
+
+        // Pega quantidade do firebase se existir
+        let qty = 0;
+        if (dataFromFirebase && dataFromFirebase[key] && dataFromFirebase[key][itemName] !== undefined) {
+          qty = dataFromFirebase[key][itemName];
+        }
+
+        const input = document.createElement("input");
+        input.type = "number";
+        input.min = 0;
+        input.value = qty;
+        input.classList.add("qty-input");
+        input.dataset.cat = key;
+        input.dataset.item = itemName;
+
+        li.appendChild(span);
+        li.appendChild(input);
+        ul.appendChild(li);
+      });
+
+      // Botão salvar para a categoria
+      const btnSave = document.createElement("button");
+      btnSave.textContent = "Salvar";
+      btnSave.classList.add("save-btn");
+      btnSave.onclick = () => salvarCategoria(key, divCat);
+      divCat.appendChild(ul);
+      divCat.appendChild(btnSave);
+
+      container.appendChild(divCat);
+    }
+  }
+
+  // Função para salvar as alterações no Firebase
+  function salvarCategoria(catKey, divCat) {
+    const inputs = divCat.querySelectorAll("input.qty-input");
+    const updates = {};
+    inputs.forEach(input => {
+      const item = input.dataset.item;
+      const value = parseInt(input.value);
+      updates[item] = value >= 0 ? value : 0;
+    });
+
+    database.ref(catKey).set(updates)
+      .then(() => alert(`Estoque da categoria ${categories[catKey].name} salvo com sucesso!`))
+      .catch(err => alert("Erro ao salvar no Firebase: " + err));
+  }
+
+  // Função para carregar os dados do Firebase e montar interface
+  function carregarDados() {
+    database.ref().once("value")
+      .then(snapshot => {
+        const data = snapshot.val();
+        montarInterface(data);
+      })
+      .catch(err => {
+        alert("Erro ao carregar dados do Firebase: " + err);
+        montarInterface(null);
+      });
+  }
+
+  // Ao carregar a página, traz os dados
+  window.onload = carregarDados;
+</script>
 </body>
 </html>
