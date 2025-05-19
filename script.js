@@ -20,6 +20,19 @@ const malhas = [
   "TECTEL", "BORA-BORA", "PP 100% POLY", "PUNHO DRY", "PUNHO FIRME"
 ];
 
+const meioes = [
+  "ADT- KANXA PRETO", "ADT- KANXA BRANCO", "ADT- KANXA AZ. ROYAL", "ADT- KANXA AZ. MARINHO",
+  "ADT- KANXA AMARELO", "ADT- KANXA VERMELHO", "ADT- KANXA VERDE", "ADT- KANXA VERDE E PR.",
+  "ADT- KANXA VERMELHO E BR.", "ADT- KANXA AZ. CLARO", "JUV- KANXA PRETO", "JUV- KANXA BRANCO",
+  "JUV- KANXA AZ. ROYAL", "JUV- KANXA AZ. MARINHO", "JUV- KANXA AMARELO", "JUV- KANXA VERMELHO",
+  "JUV- KANXA VERDE", "JUV- KANXA LARANJA", "INF- KANXA PRETO", "INF- KANXA BRANCO",
+  "INF- KANXA AZ. ROYAL", "INF- KANXA AZ. MARINHO", "INF- KANXA AMARELO", "INF- KANXA VERMELHO",
+  "INF- KANXA VERDE", "INF- KANXA LARANJA", "ADT- FINTA PRETO", "ADT- FINTA BRANCO",
+  "ADT- FINTA AZ. ROYAL", "ADT- FINTA AZ. MARINHO", "ADT- FINTA AMARELO", "ADT- FINTA VERMELHO",
+  "ADT- FINTA VERDE", "JUV- FINTA AZ. MARINHO", "JUV- FINTA VERMELHO", "INF- FINTA BRANCO",
+  "INF- FINTA AZ. CLARO"
+];
+
 const categories = {
   malhas: { name: "Malhas", items: malhas },
   tintas: {
@@ -29,6 +42,10 @@ const categories = {
   papeis: {
     name: "Papéis",
     items: ["Papel Condelhove 1,80m", "Papel Condelhove 1,60m", "Papel Wiprime", "Papel Seda 40g", "Papel Kraft 1,80", "Papel Kraft 1,60"]
+  },
+  meioes: {
+    name: "Meiões",
+    items: meioes
   }
 };
 
@@ -99,7 +116,6 @@ function montarInterface(dataFromFirebase) {
       input.dataset.cat = key;
       input.dataset.item = itemName;
 
-      // Verifica estoque mínimo
       const minimo = estoqueMinimo[itemName.toUpperCase()] || estoqueMinimo[itemName];
       if (minimo !== undefined && qty < minimo) {
         li.style.backgroundColor = "#ffe5e5";
