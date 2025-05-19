@@ -12,8 +12,28 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 const database = firebase.database();
 
-const malhas = [/*...*/]; // mantido igual
-const meioes = [/*...*/]; // mantido igual
+const malhas = [
+  "HELANCA", "DRY 180 PLUS EF", "DRY 180 EF 1,60", "DRY SOFT", "DRY FLEX UV",
+  "JIMP DRY", "JIMP DRY 1,60", "MANCHESTER", "ABSTRACT", "ACTION", "EURO",
+  "CHIMPA", "HELANCA FLANELADA", "DRY UV EMATEX", "DRY 100 EMATEX", "GABARDINE",
+  "FURADINHO", "NBA", "NBA (FURADINHO)", "OXFORD", "OXFORDINE", "QUADRADINHO",
+  "TECTEL", "BORA-BORA", "PP 100% POLY", "PUNHO DRY", "PUNHO FIRME"
+];
+
+const meioes = [
+  "ADT - KANXA PRETO", "ADT - KANXA BRANCO", "ADT - KANXA AZ. ROYAL", "ADT - KANXA AZ. MARINHO",
+  "ADT - KANXA AMARELO", "ADT - KANXA VERMELHO", "ADT - KANXA VERDE", "ADT - KANXA VERDE E PR.",
+  "ADT - KANXA VERMELHO E BR.", "ADT - KANXA AZ. CLARO", "JUV - KANXA PRETO", "JUV - KANXA BRANCO",
+  "JUV - KANXA AZ. ROYAL", "JUV - KANXA AZ. MARINHO", "JUV - KANXA AMARELO", "JUV - KANXA VERMELHO",
+  "JUV - KANXA VERDE", "JUV - KANXA LARANJA", "INF - KANXA PRETO", "INF - KANXA BRANCO",
+  "INF - KANXA AZ. ROYAL", "INF - KANXA AZ. MARINHO", "INF - KANXA AMARELO", "INF - KANXA VERMELHO",
+  "INF - KANXA VERDE", "INF - KANXA LARANJA", "ADT - FINTA PRETO", "ADT - FINTA BRANCO",
+  "ADT - FINTA AZ. ROYAL", "ADT - FINTA AZ. MARINHO", "ADT - FINTA AMARELO", "ADT - FINTA VERMELHO",
+  "ADT - FINTA VERDE", "JUV - FINTA PRETO", "JUV - FINTA BRANCO", "JUV - FINTA AZ. ROYAL",
+  "JUV - FINTA AZ. MARINHO", "JUV - FINTA AMARELO", "JUV - FINTA VERMELHO", "JUV - FINTA VERDE",
+  "INF - FINTA PRETO", "INF - FINTA BRANCO", "INF - FINTA AZ. ROYAL", "INF - FINTA AZ. MARINHO",
+  "INF - FINTA AMARELO", "INF - FINTA VERMELHO", "INF - FINTA VERDE"
+];
 
 const categories = {
   malhas: { name: "Malhas", items: malhas },
@@ -32,7 +52,7 @@ const categories = {
 };
 
 const estoqueMinimo = {
-  // seus valores anteriores, mantidos
+  // Você pode incluir aqui os mínimos desejados
 };
 
 function criarSubtitulo(texto) {
@@ -69,23 +89,19 @@ function montarInterface(dataFromFirebase) {
 
     if (key === "meioes") {
       const grupos = {
-        "ADT - KANXA": [],
-        "JUV - KANXA": [],
-        "INF - KANXA": [],
-        "ADT - FINTA": [],
-        "JUV - FINTA": [],
-        "INF - FINTA": [],
-        OUTROS: []
+        "ADT - KANXA": [], "JUV - KANXA": [], "INF - KANXA": [],
+        "ADT - FINTA": [], "JUV - FINTA": [], "INF - FINTA": [],
+        "OUTROS": []
       };
 
       cat.items.forEach(item => {
-        if (item.includes("ADT - KANXA")) grupos["ADT - KANXA"].push(item);
-        else if (item.includes("JUV - KANXA")) grupos["JUV - KANXA"].push(item);
-        else if (item.includes("INF - KANXA")) grupos["INF - KANXA"].push(item);
-        else if (item.includes("ADT - FINTA")) grupos["ADT - FINTA"].push(item);
-        else if (item.includes("JUV - FINTA")) grupos["JUV - FINTA"].push(item);
-        else if (item.includes("INF - FINTA")) grupos["INF - FINTA"].push(item);
-        else grupos.OUTROS.push(item);
+        if (item.startsWith("ADT - KANXA")) grupos["ADT - KANXA"].push(item);
+        else if (item.startsWith("JUV - KANXA")) grupos["JUV - KANXA"].push(item);
+        else if (item.startsWith("INF - KANXA")) grupos["INF - KANXA"].push(item);
+        else if (item.startsWith("ADT - FINTA")) grupos["ADT - FINTA"].push(item);
+        else if (item.startsWith("JUV - FINTA")) grupos["JUV - FINTA"].push(item);
+        else if (item.startsWith("INF - FINTA")) grupos["INF - FINTA"].push(item);
+        else grupos["OUTROS"].push(item);
       });
 
       for (const grupo in grupos) {
@@ -108,6 +124,12 @@ function montarInterface(dataFromFirebase) {
             input.classList.add("qty-input");
             input.dataset.cat = key;
             input.dataset.item = itemName;
+
+            const minimo = estoqueMinimo[itemName.toUpperCase()] || estoqueMinimo[itemName];
+            if (minimo !== undefined && qty < minimo) {
+              li.style.backgroundColor = "#ffe5e5";
+              li.title = `Estoque mínimo recomendado: ${minimo}`;
+            }
 
             li.appendChild(span);
             li.appendChild(input);
