@@ -13,26 +13,18 @@ firebase.initializeApp(firebaseConfig);
 const database = firebase.database();
 
 const malhas = [
-  "HELANCA", "DRY 180 PLUS EF", "DRY 180 EF 1,60", "DRY SOFT", "DRY FLEX UV",
-  "JIMP DRY", "JIMP DRY 1,60", "MANCHESTER", "ABSTRACT", "ACTION", "EURO",
-  "CHIMPA", "HELANCA FLANELADA", "DRY UV EMATEX", "DRY 100 EMATEX", "GABARDINE",
-  "FURADINHO", "NBA", "NBA (FURADINHO)", "OXFORD", "OXFORDINE", "QUADRADINHO",
-  "TECTEL", "BORA-BORA", "PP 100% POLY", "PUNHO DRY", "PUNHO FIRME"
+  "HELANCA", "DRY 180 PLUS EF", "DRY SOFT", "JIMP DRY", "MANCHESTER", "ABSTRACT",
+  "ACTION", "GABARDINE", "CHIMPA", "FURADINHO", "NBA", "NBA (FURADINHO)", "OXFORD",
+  "OXFORDINE", "QUADRADINHO", "BORA BORA", "PUNHO DRY", "PUNHO FIRME", "PP 100% POLY"
 ];
 
 const meioes = [
-  "ADT - KANXA PRETO", "ADT - KANXA BRANCO", "ADT - KANXA AZ. ROYAL", "ADT - KANXA AZ. MARINHO",
-  "ADT - KANXA AMARELO", "ADT - KANXA VERMELHO", "ADT - KANXA VERDE", "ADT - KANXA VERDE E PR.",
-  "ADT - KANXA VERMELHO E BR.", "ADT - KANXA AZ. CLARO", "JUV - KANXA PRETO", "JUV - KANXA BRANCO",
-  "JUV - KANXA AZ. ROYAL", "JUV - KANXA AZ. MARINHO", "JUV - KANXA AMARELO", "JUV - KANXA VERMELHO",
-  "JUV - KANXA VERDE", "JUV - KANXA LARANJA", "INF - KANXA PRETO", "INF - KANXA BRANCO",
-  "INF - KANXA AZ. ROYAL", "INF - KANXA AZ. MARINHO", "INF - KANXA AMARELO", "INF - KANXA VERMELHO",
-  "INF - KANXA VERDE", "INF - KANXA LARANJA", "ADT - FINTA PRETO", "ADT - FINTA BRANCO",
-  "ADT - FINTA AZ. ROYAL", "ADT - FINTA AZ. MARINHO", "ADT - FINTA AMARELO", "ADT - FINTA VERMELHO",
-  "ADT - FINTA VERDE", "JUV - FINTA PRETO", "JUV - FINTA BRANCO", "JUV - FINTA AZ. ROYAL",
-  "JUV - FINTA AZ. MARINHO", "JUV - FINTA AMARELO", "JUV - FINTA VERMELHO", "JUV - FINTA VERDE",
-  "INF - FINTA PRETO", "INF - FINTA BRANCO", "INF - FINTA AZ. ROYAL", "INF - FINTA AZ. MARINHO",
-  "INF - FINTA AMARELO", "INF - FINTA VERMELHO", "INF - FINTA VERDE"
+  "ADT - KANXA PRETO", "ADT - KANXA BRANCO", "ADT - KANXA VERMELHO", "ADT - KANXA AZUL MARINHO",
+  "ADT - FINTA BRANCO", "ADT - FINTA PRETO",
+  "JUV - KANXA BRANCO", "JUV - KANXA PRETO", "JUV - KANXA VERMELHO", "JUV - KANXA AZUL MARINHO",
+  "JUV - FINTA BRANCO", "JUV - FINTA PRETO",
+  "INF - KANXA BRANCO", "INF - KANXA PRETO", "INF - KANXA VERMELHO", "INF - KANXA AZUL MARINHO",
+  "INF - FINTA BRANCO", "INF - FINTA PRETO"
 ];
 
 const categories = {
@@ -43,7 +35,11 @@ const categories = {
   },
   papeis: {
     name: "Papéis",
-    items: ["Papel Condelhove 1,80m", "Papel Condelhove 1,60m", "Papel Wiprime", "Papel Seda 40g", "Papel Kraft 1,80", "Papel Kraft 1,60"]
+    items: [
+      "Papel Coldenhove 1,80m", "Papel Coldenhove 1,60m",
+      "Papel Seda 40g", "Papel Wiprime",
+      "Papel Kraft 1,80", "Papel Kraft 1,60"
+    ]
   },
   meioes: {
     name: "Meiões",
@@ -52,7 +48,30 @@ const categories = {
 };
 
 const estoqueMinimo = {
-  // Você pode incluir aqui os mínimos desejados
+  "HELANCA": 6,
+  "DRY SOFT": 12,
+  "JIMP DRY": 17,
+  "MANCHESTER": 3,
+  "ABSTRACT": 3,
+  "ACTION": 3,
+  "GABARDINE": 1,
+  "CHIMPA": 3,
+  "FURADINHO": 2,
+  "NBA": 1,
+  "NBA (FURADINHO)": 1,
+  "OXFORD": 1,
+  "OXFORDINE": 1,
+  "QUADRADINHO": 3,
+  "BORA BORA": 1,
+  "PUNHO DRY": 4,
+  "PUNHO FIRME": 2,
+  "PP 100% POLY": 1,
+  "Papel Coldenhove 1,80m": 10,
+  "Papel Coldenhove 1,60m": 3,
+  "Papel Seda 40g": 3,
+  "Papel Wiprime": 10,
+  "Papel Kraft 1,80": 3,
+  "Papel Kraft 1,60": 3
 };
 
 function criarSubtitulo(texto) {
@@ -91,17 +110,17 @@ function montarInterface(dataFromFirebase) {
       const grupos = {
         "ADT - KANXA": [], "JUV - KANXA": [], "INF - KANXA": [],
         "ADT - FINTA": [], "JUV - FINTA": [], "INF - FINTA": [],
-        "OUTROS": []
+        OUTROS: []
       };
 
       cat.items.forEach(item => {
-        if (item.startsWith("ADT - KANXA")) grupos["ADT - KANXA"].push(item);
-        else if (item.startsWith("JUV - KANXA")) grupos["JUV - KANXA"].push(item);
-        else if (item.startsWith("INF - KANXA")) grupos["INF - KANXA"].push(item);
-        else if (item.startsWith("ADT - FINTA")) grupos["ADT - FINTA"].push(item);
-        else if (item.startsWith("JUV - FINTA")) grupos["JUV - FINTA"].push(item);
-        else if (item.startsWith("INF - FINTA")) grupos["INF - FINTA"].push(item);
-        else grupos["OUTROS"].push(item);
+        if (item.includes("ADT - KANXA")) grupos["ADT - KANXA"].push(item);
+        else if (item.includes("JUV - KANXA")) grupos["JUV - KANXA"].push(item);
+        else if (item.includes("INF - KANXA")) grupos["INF - KANXA"].push(item);
+        else if (item.includes("ADT - FINTA")) grupos["ADT - FINTA"].push(item);
+        else if (item.includes("JUV - FINTA")) grupos["JUV - FINTA"].push(item);
+        else if (item.includes("INF - FINTA")) grupos["INF - FINTA"].push(item);
+        else grupos.OUTROS.push(item);
       });
 
       for (const grupo in grupos) {
