@@ -15,7 +15,7 @@ const database = firebase.database();
 
 // Lista completa das malhas
 const malhas = [
-  "HELANCA", "DRY 180 PLUS EF", "DRY 180 EF", "DRY SOFT", "DRY FLEX UV",
+  "HELANCA", "DRY 180 PLUS EF", "DRY 180 EF 1,60", "DRY SOFT", "DRY FLEX UV",
   "JIMP DRY LARGE", "JIMP DRY", "MANCHESTER", "ABSTRACT", "ACTION", "EURO",
   "CHIMPA", "HELANCA FLANELADA", "DRY UV EMATEX", "DRY 100 EMATEX", "GABARDINE",
   "FURADINHO", "NBA", "NBA (FURADINHO)", "OXFORD", "OXFORDINE", "QUADRADINHO",
@@ -24,7 +24,7 @@ const malhas = [
 
 // Estoque mínimo por produto
 const estoqueMinimo = {
-  "HELANCA LIGHT": 6, "DRY SOFT": 12, "JIMP DRY": 17, "MANCHESTER": 3,
+  "HELANCA": 6, "DRY SOFT": 12, "JIMP DRY": 17, "MANCHESTER": 3,
   "ABSTRACT": 3, "ACTION": 3, "CHIMPA": 3, "GABARDINE": 1, "FURADINHO": 2,
   "NBA": 1, "NBA (FURADINHO)": 1, "OXFORD": 1, "OXFORDINE": 1,
   "QUADRADINHO": 3, "BORA-BORA": 1, "PUNHO DRY": 4, "PUNHO FIRME": 2,
