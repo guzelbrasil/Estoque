@@ -14,7 +14,7 @@ const database = firebase.database();
 
 const malhas = [
   "HELANCA", "DRY 180 PLUS EF", "DRY 180 EF", "DRY SOFT", "DRY FLEX UV",
-  "JIMP DRY LARGE", "JIMP DRY", "MANCHESTER", "ABSTRACT", "ACTION", "EURO",
+  "JIMP DRY", "JIMP DRY 1,60", "MANCHESTER", "ABSTRACT", "ACTION", "EURO",
   "CHIMPA", "HELANCA FLANELADA", "DRY UV EMATEX", "DRY 100 EMATEX", "GABARDINE",
   "FURADINHO", "NBA", "NBA (FURADINHO)", "OXFORD", "OXFORDINE", "QUADRADINHO",
   "TECTEL", "BORA-BORA", "PP 100% POLY", "PUNHO DRY", "PUNHO FIRME"
@@ -28,7 +28,7 @@ const categories = {
   },
   papeis: {
     name: "Papéis",
-    items: ["Papel Condelhove 1,80m", "Papel Condelhove 1,60m", "Papel Seda 40g"]
+    items: ["Papel Condelhove 1,80m", "Papel Condelhove 1,60m", "Papel Wiprime", "Papel Seda 40g", "Papel Kraft 1,80", "Papel Kraft 1,60"]
   }
 };
 
@@ -56,7 +56,9 @@ const estoqueMinimo = {
   "Tinta Preto": 3,
   "Papel Condelhove 1,80m": 11,
   "Papel Condelhove 1,60m": 4,
+  "Papel Wiprime": 4,
   "Papel Seda 40g": 4
+  "Papel Kraft 1,80": 3
 };
 
 function montarInterface(dataFromFirebase) {
