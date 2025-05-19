@@ -2,213 +2,49 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Estoque - Guzel</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Estoque Guzel - Atualização em Tempo Real</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="container">
-    <header>
-      <h1 class="logo">Guzel</h1>
-      <h2 class="titulo">Controle de Estoque</h2>
-    </header>
+  <header>
+    <h1>Estoque Guzel - Atualização em Tempo Real</h1>
+  </header>
 
-    <!-- TINTAS -->
-    <section>
-      <h3 class="categoria-titulo">Tintas</h3>
-      <div class="categoria">
-        <div class="item">
-          <label>CIANO:</label>
-          <div class="quantidade">
-            <button onclick="alterarQuantidade('ciano', -1)">-</button>
-            <span id="quantidade-ciano">0</span>
-            <button onclick="alterarQuantidade('ciano', 1)">+</button>
-          </div>
-          <button class="salvar-btn" onclick="salvarQuantidade('ciano')">Salvar</button>
-        </div>
-        <div class="item">
-          <label>MAGENTA:</label>
-          <div class="quantidade">
-            <button onclick="alterarQuantidade('magenta', -1)">-</button>
-            <span id="quantidade-magenta">0</span>
-            <button onclick="alterarQuantidade('magenta', 1)">+</button>
-          </div>
-          <button class="salvar-btn" onclick="salvarQuantidade('magenta')">Salvar</button>
-        </div>
-        <div class="item">
-          <label>AMARELO:</label>
-          <div class="quantidade">
-            <button onclick="alterarQuantidade('amarelo', -1)">-</button>
-            <span id="quantidade-amarelo">0</span>
-            <button onclick="alterarQuantidade('amarelo', 1)">+</button>
-          </div>
-          <button class="salvar-btn" onclick="salvarQuantidade('amarelo')">Salvar</button>
-        </div>
-        <div class="item">
-          <label>PRETO:</label>
-          <div class="quantidade">
-            <button onclick="alterarQuantidade('preto', -1)">-</button>
-            <span id="quantidade-preto">0</span>
-            <button onclick="alterarQuantidade('preto', 1)">+</button>
-          </div>
-          <button class="salvar-btn" onclick="salvarQuantidade('preto')">Salvar</button>
-        </div>
-      </div>
+  <main>
+    <section class="categoria" id="tintas">
+      <h2><i class="fas fa-paint-roller"></i> Tintas</h2>
+      <form id="form-tintas" class="form-categoria">
+        <ul id="lista-tintas" class="lista-estoque"></ul>
+        <button type="submit" class="btn-salvar">Salvar Tintas</button>
+      </form>
     </section>
 
-    <!-- PAPÉIS -->
-    <section>
-      <h3 class="categoria-titulo">Papéis</h3>
-      <div class="categoria">
-        <div class="item">
-          <label>COLDENHOVE 1,80:</label>
-          <div class="quantidade">
-            <button onclick="alterarQuantidade('papel1', -1)">-</button>
-            <span id="quantidade-papel1">0</span>
-            <button onclick="alterarQuantidade('papel1', 1)">+</button>
-          </div>
-          <button class="salvar-btn" onclick="salvarQuantidade('papel1')">Salvar</button>
-        </div>
-        <div class="item">
-          <label>CONDENHOVE 1,60:</label>
-          <div class="quantidade">
-            <button onclick="alterarQuantidade('papel2', -1)">-</button>
-            <span id="quantidade-papel2">0</span>
-            <button onclick="alterarQuantidade('papel2', 1)">+</button>
-          </div>
-          <button class="salvar-btn" onclick="salvarQuantidade('papel2')">Salvar</button>
-        </div>
-        <div class="item">
-          <label>SEDA 60g:</label>
-          <div class="quantidade">
-            <button onclick="alterarQuantidade('papel3', -1)">-</button>
-            <span id="quantidade-papel3">0</span>
-            <button onclick="alterarQuantidade('papel3', 1)">+</button>
-          </div>
-          <button class="salvar-btn" onclick="salvarQuantidade('papel3')">Salvar</button>
-        </div>
-        <div class="item">
-          <label>SEDA 40g:</label>
-          <div class="quantidade">
-            <button onclick="alterarQuantidade('papel4', -1)">-</button>
-            <span id="quantidade-papel4">0</span>
-            <button onclick="alterarQuantidade('papel4', 1)">+</button>
-          </div>
-          <button class="salvar-btn" onclick="salvarQuantidade('papel4')">Salvar</button>
-        </div>
-        <div class="item">
-          <label>KRAFT 1,80:</label>
-          <div class="quantidade">
-            <button onclick="alterarQuantidade('papel5', -1)">-</button>
-            <span id="quantidade-papel5">0</span>
-            <button onclick="alterarQuantidade('papel5', 1)">+</button>
-          </div>
-          <button class="salvar-btn" onclick="salvarQuantidade('papel5')">Salvar</button>
-        </div>
-        <div class="item">
-          <label>KRAFT 1,60:</label>
-          <div class="quantidade">
-            <button onclick="alterarQuantidade('papel6', -1)">-</button>
-            <span id="quantidade-papel6">0</span>
-            <button onclick="alterarQuantidade('papel6', 1)">+</button>
-          </div>
-          <button class="salvar-btn" onclick="salvarQuantidade('papel6')">Salvar</button>
-        </div>
-      </div>
+    <section class="categoria" id="malhas">
+      <h2><i class="fas fa-tshirt"></i> Malhas</h2>
+      <form id="form-malhas" class="form-categoria">
+        <ul id="lista-malhas" class="lista-estoque"></ul>
+        <button type="submit" class="btn-salvar">Salvar Malhas</button>
+      </form>
     </section>
 
-    <!-- MALHAS -->
-    <section>
-      <h3 class="categoria-titulo">Malhas</h3>
-      <div class="categoria">
-        <!-- Malhas -->
-        <div class="item"><label>HELANCA:</label><div class="quantidade"><button onclick="alterarQuantidade('malha1', -1)">-</button><span id="quantidade-malha1">0</span><button onclick="alterarQuantidade('malha1', 1)">+</button></div><button class="salvar-btn" onclick="salvarQuantidade('malha1')">Salvar</button></div>
-        <div class="item"><label>DRY 180 PLUS EF:</label><div class="quantidade"><button onclick="alterarQuantidade('malha2', -1)">-</button><span id="quantidade-malha2">0</span><button onclick="alterarQuantidade('malha2', 1)">+</button></div><button class="salvar-btn" onclick="salvarQuantidade('malha2')">Salvar</button></div>
-        <div class="item"><label>DRY 180 EF:</label><div class="quantidade"><button onclick="alterarQuantidade('malha3', -1)">-</button><span id="quantidade-malha3">0</span><button onclick="alterarQuantidade('malha3', 1)">+</button></div><button class="salvar-btn" onclick="salvarQuantidade('malha3')">Salvar</button></div>
-        <div class="item"><label>DRY SOFT:</label><div class="quantidade"><button onclick="alterarQuantidade('malha4', -1)">-</button><span id="quantidade-malha4">0</span><button onclick="alterarQuantidade('malha4', 1)">+</button></div><button class="salvar-btn" onclick="salvarQuantidade('malha4')">Salvar</button></div>
-        <div class="item"><label>DRY FLEX UV:</label><div class="quantidade"><button onclick="alterarQuantidade('malha5', -1)">-</button><span id="quantidade-malha5">0</span><button onclick="alterarQuantidade('malha5', 1)">+</button></div><button class="salvar-btn" onclick="salvarQuantidade('malha5')">Salvar</button></div>
-        <div class="item"><label>JIMP DRY LARGE:</label><div class="quantidade"><button onclick="alterarQuantidade('malha6', -1)">-</button><span id="quantidade-malha6">0</span><button onclick="alterarQuantidade('malha6', 1)">+</button></div><button class="salvar-btn" onclick="salvarQuantidade('malha6')">Salvar</button></div>
-        <div class="item"><label>JIMP DRY:</label><div class="quantidade"><button onclick="alterarQuantidade('malha7', -1)">-</button><span id="quantidade-malha7">0</span><button onclick="alterarQuantidade('malha7', 1)">+</button></div><button class="salvar-btn" onclick="salvarQuantidade('malha7')">Salvar</button></div>
-        <div class="item"><label>MANCHESTER:</label><div class="quantidade"><button onclick="alterarQuantidade('malha8', -1)">-</button><span id="quantidade-malha8">0</span><button onclick="alterarQuantidade('malha8', 1)">+</button></div><button class="salvar-btn" onclick="salvarQuantidade('malha8')">Salvar</button></div>
-        <div class="item"><label>ABSTRACT:</label><div class="quantidade"><button onclick="alterarQuantidade('malha9', -1)">-</button><span id="quantidade-malha9">0</span><button onclick="alterarQuantidade('malha9', 1)">+</button></div><button class="salvar-btn" onclick="salvarQuantidade('malha9')">Salvar</button></div>
-        <div class="item"><label>ACTION:</label><div class="quantidade"><button onclick="alterarQuantidade('malha10', -1)">-</button><span id="quantidade-malha10">0</span><button onclick="alterarQuantidade('malha10', 1)">+</button></div><button class="salvar-btn" onclick="salvarQuantidade('malha10')">Salvar</button></div>
-        <div class="item"><label>EURO:</label><div class="quantidade"><button onclick="alterarQuantidade('malha11', -1)">-</button><span id="quantidade-malha11">0</span><button onclick="alterarQuantidade('malha11', 1)">+</button></div><button class="salvar-btn" onclick="salvarQuantidade('malha11')">Salvar</button></div>
-        <div class="item"><label>CHIMPA:</label><div class="quantidade"><button onclick="alterarQuantidade('malha12', -1)">-</button><span id="quantidade-malha12">0</span><button onclick="alterarQuantidade('malha12', 1)">+</button></div><button class="salvar-btn" onclick="salvarQuantidade('malha12')">Salvar</button></div>
-        <div class="item"><label>HELANCA FLANELADA:</label><div class="quantidade"><button onclick="alterarQuantidade('malha13', -1)">-</button><span id="quantidade-malha13">0</span><button onclick="alterarQuantidade('malha13', 1)">+</button></div><button class="salvar-btn" onclick="salvarQuantidade('malha13')">Salvar</button></div>
-        <div class="item"><label>DRY UV EMATEX:</label><div class="quantidade"><button onclick="alterarQuantidade('malha14', -1)">-</button><span id="quantidade-malha14">0</span><button onclick="alterarQuantidade('malha14', 1)">+</button></div><button class="salvar-btn" onclick="salvarQuantidade('malha14')">Salvar</button></div>
-        <div class="item"><label>DRY 100 EMATEX:</label><div class="quantidade"><button onclick="alterarQuantidade('malha15', -1)">-</button><span id="quantidade-malha15">0</span><button onclick="alterarQuantidade('malha15', 1)">+</button></div><button class="salvar-btn" onclick="salvarQuantidade('malha15')">Salvar</button></div>
-        <div class="item"><label>GABARDINE:</label><div class="quantidade"><button onclick="alterarQuantidade('malha16', -1)">-</button><span id="quantidade-malha16">0</span><button onclick="alterarQuantidade('malha16', 1)">+</button></div><button class="salvar-btn" onclick="salvarQuantidade('malha16')">Salvar</button></div>
-        <div class="item"><label>FURADINHO:</label><div class="quantidade"><button onclick="alterarQuantidade('malha17', -1)">-</button><span id="quantidade-malha17">0</span><button onclick="alterarQuantidade('malha17', 1)">+</button></div><button class="salvar-btn" onclick="salvarQuantidade('malha17')">Salvar</button></div>
-        <div class="item"><label>NBA:</label><div class="quantidade"><button onclick="alterarQuantidade('malha18', -1)">-</button><span id="quantidade-malha18">0</span><button onclick="alterarQuantidade('malha18', 1)">+</button></div><button class="salvar-btn" onclick="salvarQuantidade('malha18')">Salvar</button></div>
-        <div class="item"><label>NBA (FURADINHO):</label><div class="quantidade"><button onclick="alterarQuantidade('malha19', -1)">-</button><span id="quantidade-malha19">0</span><button onclick="alterarQuantidade('malha19', 1)">+</button></div><button class="salvar-btn" onclick="salvarQuantidade('malha19')">Salvar</button></div>
-        <div class="item"><label>OXFORD:</label><div class="quantidade"><button onclick="alterarQuantidade('malha20', -1)">-</button><span id="quantidade-malha20">0</span><button onclick="alterarQuantidade('malha20', 1)">+</button></div><button class="salvar-btn" onclick="salvarQuantidade('malha20')">Salvar</button></div>
-        <div class="item"><label>OXFORDINE:</label><div class="quantidade"><button onclick="alterarQuantidade('malha21', -1)">-</button><span id="quantidade-malha21">0</span><button onclick="alterarQuantidade('malha21', 1)">+</button></div><button class="salvar-btn" onclick="salvarQuantidade('malha21')">Salvar</button></div>
-        <div class="item"><label>QUADRADINHO:</label><div class="quantidade"><button onclick="alterarQuantidade('malha22', -1)">-</button><span id="quantidade-malha22">0</span><button onclick="alterarQuantidade('malha22', 1)">+</button></div><button class="salvar-btn" onclick="salvarQuantidade('malha22')">Salvar</button></div>
-        <div class="item"><label>TECTEL:</label><div class="quantidade"><button onclick="alterarQuantidade('malha23', -1)">-</button><span id="quantidade-malha23">0</span><button onclick="alterarQuantidade('malha23', 1)">+</button></div><button class="salvar-btn" onclick="salvarQuantidade('malha23')">Salvar</button></div>
-        <div class="item"><label>BORA-BORA:</label><div class="quantidade"><button onclick="alterarQuantidade('malha24', -1)">-</button><span id="quantidade-malha24">0</span><button onclick="alterarQuantidade('malha24', 1)">+</button></div><button class="salvar-btn" onclick="salvarQuantidade('malha24')">Salvar</button></div>
-        <div class="item"><label>PP 100% POLY:</label><div class="quantidade"><button onclick="alterarQuantidade('malha25', -1)">-</button><span id="quantidade-malha25">0</span><button onclick="alterarQuantidade('malha25', 1)">+</button></div><button class="salvar-btn" onclick="salvarQuantidade('malha25')">Salvar</button></div>
-      </div>
+    <section class="categoria" id="papeis">
+      <h2><i class="fas fa-file-alt"></i> Papéis</h2>
+      <form id="form-papeis" class="form-categoria">
+        <ul id="lista-papeis" class="lista-estoque"></ul>
+        <button type="submit" class="btn-salvar">Salvar Papéis</button>
+      </form>
     </section>
+  </main>
 
-    <!-- Botões de Ações Gerais -->
-    <section>
-      <button class="salvar-tudo" onclick="salvarTudo()">Salvar Tudo</button>
-      <button class="zerar-tudo" onclick="zerarTudo()">Zerar Tudo</button>
-    </section>
-  </div>
+  <footer>
+    <p>© 2025 Estoque Guzel - Atualização em tempo real com Firebase</p>
+  </footer>
 
-  <script>
-    function alterarQuantidade(item, incremento) {
-      const el = document.getElementById(`quantidade-${item}`);
-      let valor = parseInt(el.textContent) || 0;
-      valor = Math.max(0, valor + incremento);
-      el.textContent = valor;
-    }
-
-    function salvarQuantidade(item) {
-      const valor = document.getElementById(`quantidade-${item}`).textContent;
-      localStorage.setItem(`estoque-${item}`, valor);
-      alert(`Quantidade de "${item.toUpperCase()}" salva com sucesso!`);
-    }
-
-    function carregarQuantidadesSalvas() {
-      const ids = [
-        'ciano', 'magenta', 'amarelo', 'preto',
-        'papel1', 'papel2', 'papel3', 'papel4', 'papel5', 'papel6',
-        'malha1', 'malha2', 'malha3', 'malha4', 'malha5', 'malha6',
-        'malha7', 'malha8', 'malha9', 'malha10', 'malha11', 'malha12',
-        'malha13', 'malha14', 'malha15', 'malha16', 'malha17', 'malha18',
-        'malha19', 'malha20', 'malha21', 'malha22', 'malha23', 'malha24',
-        'malha25'
-      ];
-      ids.forEach(id => {
-        const valorSalvo = localStorage.getItem(`estoque-${id}`);
-        if (valorSalvo !== null) {
-          document.getElementById(`quantidade-${id}`).textContent = valorSalvo;
-        }
-      });
-    }
-
-    function salvarTudo() {
-      const spans = document.querySelectorAll('[id^="quantidade-"]');
-      spans.forEach(span => {
-        const id = span.id.replace("quantidade-", "");
-        salvarQuantidade(id);
-      });
-    }
-
-    function zerarTudo() {
-      const spans = document.querySelectorAll('[id^="quantidade-"]');
-      spans.forEach(span => {
-        span.textContent = 0;
-        const id = span.id.replace("quantidade-", "");
-        localStorage.setItem(`estoque-${id}`, "0");
-      });
-      alert("Todos os itens foram zerados e salvos.");
-    }
-
-    // Carregar valores salvos ao abrir a página
-    window.onload = carregarQuantidadesSalvas;
-  </script>
+  <!-- Firebase compat libs -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
