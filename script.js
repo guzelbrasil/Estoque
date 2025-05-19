@@ -17,10 +17,10 @@ const db = firebase.database();
 // Dados iniciais para popular a base, caso esteja vazia
 const dadosIniciais = {
   tintas: {
-    "Branco": 50,
-    "Preto": 30,
-    "Azul Royal": 20,
-    "Vermelho": 15,
+    "Ciano": 50,
+    "Magenta": 30,
+    "Amarelo": 20,
+    "Preto": 15,
   },
   malhas: {
     "HELANCA": 100,
@@ -50,10 +50,9 @@ const dadosIniciais = {
     "PP 100% POLY": 28
   },
   papeis: {
-    "Sulfite A4": 1000,
-    "Couche 120g": 500,
-    "Reciclado": 300,
-    "Cartolina": 150,
+    "Condenhove 1,80m": 1000,
+    "Condenhove 1,60m": 500,
+    "Seda 40g": 300,
   }
 };
 
