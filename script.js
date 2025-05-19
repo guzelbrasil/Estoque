@@ -13,7 +13,7 @@ firebase.initializeApp(firebaseConfig);
 const database = firebase.database();
 
 const malhas = [
-  "HELANCA", "DRY 180 PLUS EF", "DRY 180 EF", "DRY SOFT", "DRY FLEX UV",
+  "HELANCA", "DRY 180 PLUS EF", "DRY 180 EF 1,60", "DRY SOFT", "DRY FLEX UV",
   "JIMP DRY", "JIMP DRY 1,60", "MANCHESTER", "ABSTRACT", "ACTION", "EURO",
   "CHIMPA", "HELANCA FLANELADA", "DRY UV EMATEX", "DRY 100 EMATEX", "GABARDINE",
   "FURADINHO", "NBA", "NBA (FURADINHO)", "OXFORD", "OXFORDINE", "QUADRADINHO",
