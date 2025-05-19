@@ -1,131 +1,133 @@
-// Firebase Config
+// Firebase
 const firebaseConfig = {
   apiKey: "AIzaSyCSObisT9tnm6TM9gzRH782YAebfTzsp2U",
   authDomain: "estoqueguzel.firebaseapp.com",
   databaseURL: "https://estoqueguzel-default-rtdb.firebaseio.com",
   projectId: "estoqueguzel",
-  storageBucket: "estoqueguzel.firebasestorage.app",
+  storageBucket: "estoqueguzel.appspot.com",
   messagingSenderId: "933342103585",
   appId: "1:933342103585:web:cba330f76f53821b367b60",
   measurementId: "G-KBSGPWQG8E"
 };
 
-// Inicializa Firebase
 firebase.initializeApp(firebaseConfig);
-const db = firebase.database();
+const database = firebase.database();
 
-// Dados iniciais para popular a base, caso esteja vazia
-const dadosIniciais = {
-  tintas: {
-    "Ciano": 50,
-    "Magenta": 30,
-    "Amarelo": 20,
-    "Preto": 15,
-  },
-  malhas: {
-    "HELANCA": 100,
-    "DRY 180 PLUS EF": 80,
-    "DRY 180 EF": 75,
-    "DRY SOFT": 60,
-    "DRY FLEX UV": 40,
-    "JIMP DRY LARGE": 25,
-    "JIMP DRY": 30,
-    "MANCHESTER": 55,
-    "ABSTRACT": 10,
-    "ACTION": 8,
-    "EURO": 20,
-    "CHIMPA": 5,
-    "HELANCA FLANELADA": 35,
-    "DRY UV EMATEX": 22,
-    "DRY 100 EMATEX": 45,
-    "GABARDINE": 38,
-    "FURADINHO": 15,
-    "NBA": 12,
-    "NBA (FURADINHO)": 6,
-    "OXFORD": 50,
-    "OXFORDINE": 40,
-    "QUADRADINHO": 9,
-    "TECTEL": 7,
-    "BORA-BORA": 18,
-    "PP 100% POLY": 28
-  },
-  papeis: {
-    "Condenhove 1,80m": 1000,
-    "Condenhove 1,60m": 500,
-    "Seda 40g": 300,
-  }
+// Lista completa das malhas
+const malhas = [
+  "HELANCA", "DRY 180 PLUS EF", "DRY 180 EF", "DRY SOFT", "DRY FLEX UV",
+  "JIMP DRY LARGE", "JIMP DRY", "MANCHESTER", "ABSTRACT", "ACTION", "EURO",
+  "CHIMPA", "HELANCA FLANELADA", "DRY UV EMATEX", "DRY 100 EMATEX", "GABARDINE",
+  "FURADINHO", "NBA", "NBA (FURADINHO)", "OXFORD", "OXFORDINE", "QUADRADINHO",
+  "TECTEL", "BORA-BORA", "PP 100% POLY", "PUNHO DRY", "PUNHO FIRME"
+];
+
+// Estoque mínimo por produto
+const estoqueMinimo = {
+  "HELANCA LIGHT": 6, "DRY SOFT": 12, "JIMP DRY": 17, "MANCHESTER": 3,
+  "ABSTRACT": 3, "ACTION": 3, "CHIMPA": 3, "GABARDINE": 1, "FURADINHO": 2,
+  "NBA": 1, "NBA (FURADINHO)": 1, "OXFORD": 1, "OXFORDINE": 1,
+  "QUADRADINHO": 3, "BORA-BORA": 1, "PUNHO DRY": 4, "PUNHO FIRME": 2,
+  "Tinta Ciano": 3, "Tinta Magenta": 3, "Tinta Amarelo": 3, "Tinta Preto": 3,
+  "Papel Condelhove 1,80m": 11, "Papel Condelhove 1,60m": 4, "Papel Seda 40g": 4
 };
 
-// Popula a base se estiver vazia
-function popularDadosSeVazio() {
-  db.ref('/').once('value').then(snapshot => {
-    if (!snapshot.exists()) {
-      db.ref('/').set(dadosIniciais);
-    }
-  });
-}
+// Categorias
+const categories = {
+  malhas: { name: "Malhas", items: malhas },
+  tintas: { name: "Tintas", items: ["Tinta Ciano", "Tinta Magenta", "Tinta Amarelo", "Tinta Preto"] },
+  papeis: { name: "Papéis", items: ["Papel Condelhove 1,80m", "Papel Condelhove 1,60m", "Papel Seda 40g"] }
+};
 
-// Renderiza lista com inputs editáveis dentro do form
-function renderizarListaComInputs(categoria, ulId) {
-  const listaEl = document.getElementById(ulId);
+// Montar interface
+function montarInterface(dataFromFirebase) {
+  const container = document.getElementById("categories");
+  container.innerHTML = "";
 
-  db.ref(categoria).on('value', snapshot => {
-    const dados = snapshot.val() || {};
-    listaEl.innerHTML = ''; // limpa lista
+  for (const key in categories) {
+    const cat = categories[key];
+    const divCat = document.createElement("div");
+    divCat.classList.add("category");
 
-    for (const item in dados) {
-      const quantidade = dados[item];
-      const li = document.createElement('li');
+    const h2 = document.createElement("h2");
+    h2.textContent = cat.name;
+    h2.onclick = () => {
+      const ul = divCat.querySelector("ul");
+      ul.style.display = (ul.style.display === "none" || ul.style.display === "") ? "grid" : "none";
+    };
+    divCat.appendChild(h2);
 
-      // Label com nome do item
-      const label = document.createElement('label');
-      label.htmlFor = `${categoria}-${item}`;
-      label.textContent = item;
+    const ul = document.createElement("ul");
+    ul.classList.add("items");
 
-      // Input number editável
-      const input = document.createElement('input');
-      input.type = 'number';
-      input.id = `${categoria}-${item}`;
-      input.name = item;
+    cat.items.forEach(itemName => {
+      const li = document.createElement("li");
+
+      const span = document.createElement("span");
+      span.textContent = itemName;
+
+      let qty = 0;
+      if (dataFromFirebase?.[key]?.[itemName] !== undefined) {
+        qty = dataFromFirebase[key][itemName];
+      }
+
+      const input = document.createElement("input");
+      input.type = "number";
       input.min = 0;
-      input.value = quantidade;
+      input.value = qty;
+      input.classList.add("qty-input");
+      input.dataset.cat = key;
+      input.dataset.item = itemName;
 
-      li.appendChild(label);
+      const minimo = estoqueMinimo[itemName.toUpperCase()] || estoqueMinimo[itemName] || 0;
+      if (qty < minimo) li.classList.add("low-stock");
+
+      input.oninput = () => {
+        if (parseInt(input.value) < minimo) {
+          li.classList.add("low-stock");
+        } else {
+          li.classList.remove("low-stock");
+        }
+      };
+
+      li.appendChild(span);
       li.appendChild(input);
-      listaEl.appendChild(li);
-    }
-  });
+      ul.appendChild(li);
+    });
+
+    const btnSave = document.createElement("button");
+    btnSave.textContent = "Salvar";
+    btnSave.classList.add("save-btn");
+    btnSave.onclick = () => salvarCategoria(key, divCat);
+
+    divCat.appendChild(ul);
+    divCat.appendChild(btnSave);
+    container.appendChild(divCat);
+  }
 }
 
-// Função para salvar as alterações no Firebase (categoria)
-function salvarAlteracoes(event, categoria) {
-  event.preventDefault();
-  const form = event.target;
-  const dadosAtualizados = {};
-
-  // coleta todos os inputs do form
-  const inputs = form.querySelectorAll('input[type="number"]');
+// Salvar categoria
+function salvarCategoria(catKey, divCat) {
+  const inputs = divCat.querySelectorAll("input.qty-input");
+  const updates = {};
   inputs.forEach(input => {
-    const nomeItem = input.name;
-    let valor = parseInt(input.value);
-    if (isNaN(valor) || valor < 0) valor = 0; // valida
-    dadosAtualizados[nomeItem] = valor;
+    const item = input.dataset.item;
+    updates[item] = parseInt(input.value) || 0;
   });
 
-  // Atualiza no Firebase
-  db.ref(categoria).set(dadosAtualizados)
-    .then(() => alert(`Estoque de ${categoria} atualizado com sucesso!`))
-    .catch(err => alert('Erro ao atualizar estoque: ' + err.message));
+  database.ref(catKey).set(updates)
+    .then(() => alert(`Estoque da categoria ${categories[catKey].name} salvo com sucesso!`))
+    .catch(err => alert("Erro ao salvar no Firebase: " + err));
 }
 
-// Inicialização
-popularDadosSeVazio();
+// Carregar dados
+function carregarDados() {
+  database.ref().once("value")
+    .then(snapshot => montarInterface(snapshot.val()))
+    .catch(err => {
+      alert("Erro ao carregar dados: " + err);
+      montarInterface(null);
+    });
+}
 
-renderizarListaComInputs('tintas', 'lista-tintas');
-renderizarListaComInputs('malhas', 'lista-malhas');
-renderizarListaComInputs('papeis', 'lista-papeis');
-
-// Adiciona eventos para salvar cada categoria
-document.getElementById('form-tintas').addEventListener('submit', e => salvarAlteracoes(e, 'tintas'));
-document.getElementById('form-malhas').addEventListener('submit', e => salvarAlteracoes(e, 'malhas'));
-document.getElementById('form-papeis').addEventListener('submit', e => salvarAlteracoes(e, 'papeis'));
+window.onload = carregarDados;
