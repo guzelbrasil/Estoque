@@ -1,4 +1,3 @@
-// Firebase
 const firebaseConfig = {
   apiKey: "AIzaSyCSObisT9tnm6TM9gzRH782YAebfTzsp2U",
   authDomain: "estoqueguzel.firebaseapp.com",
@@ -13,33 +12,53 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 const database = firebase.database();
 
-// Lista completa das malhas
 const malhas = [
-  "HELANCA", "DRY 180 PLUS EF", "DRY 180 EF 1,60", "DRY SOFT", "DRY FLEX UV",
+  "HELANCA", "DRY 180 PLUS EF", "DRY 180 EF", "DRY SOFT", "DRY FLEX UV",
   "JIMP DRY LARGE", "JIMP DRY", "MANCHESTER", "ABSTRACT", "ACTION", "EURO",
   "CHIMPA", "HELANCA FLANELADA", "DRY UV EMATEX", "DRY 100 EMATEX", "GABARDINE",
   "FURADINHO", "NBA", "NBA (FURADINHO)", "OXFORD", "OXFORDINE", "QUADRADINHO",
   "TECTEL", "BORA-BORA", "PP 100% POLY", "PUNHO DRY", "PUNHO FIRME"
 ];
 
-// Estoque mínimo por produto
-const estoqueMinimo = {
-  "HELANCA": 6, "DRY SOFT": 12, "JIMP DRY": 17, "MANCHESTER": 3,
-  "ABSTRACT": 3, "ACTION": 3, "CHIMPA": 3, "GABARDINE": 1, "FURADINHO": 2,
-  "NBA": 1, "NBA (FURADINHO)": 1, "OXFORD": 1, "OXFORDINE": 1,
-  "QUADRADINHO": 3, "BORA-BORA": 1, "PUNHO DRY": 4, "PUNHO FIRME": 2,
-  "Tinta Ciano": 3, "Tinta Magenta": 3, "Tinta Amarelo": 3, "Tinta Preto": 3,
-  "Papel Condelhove 1,80m": 11, "Papel Condelhove 1,60m": 4, "Papel Seda 40g": 4
-};
-
-// Categorias
 const categories = {
   malhas: { name: "Malhas", items: malhas },
-  tintas: { name: "Tintas", items: ["Tinta Ciano", "Tinta Magenta", "Tinta Amarelo", "Tinta Preto"] },
-  papeis: { name: "Papéis", items: ["Papel Condelhove 1,80m", "Papel Condelhove 1,60m", "Papel Seda 40g"] }
+  tintas: {
+    name: "Tintas",
+    items: ["Tinta Ciano", "Tinta Magenta", "Tinta Amarelo", "Tinta Preto"]
+  },
+  papeis: {
+    name: "Papéis",
+    items: ["Papel Condelhove 1,80m", "Papel Condelhove 1,60m", "Papel Seda 40g"]
+  }
 };
 
-// Montar interface
+const estoqueMinimo = {
+  "HELANCA LIGHT": 6,
+  "DRY SOFT": 12,
+  "JIMP DRY": 17,
+  "MANCHESTER": 3,
+  "ABSTRACT": 3,
+  "ACTION": 3,
+  "CHIMPA": 3,
+  "GABARDINE": 1,
+  "FURADINHO": 2,
+  "NBA": 1,
+  "NBA (FURADINHO)": 1,
+  "OXFORD": 1,
+  "OXFORDINE": 1,
+  "QUADRADINHO": 3,
+  "BORA-BORA": 1,
+  "PUNHO DRY": 4,
+  "PUNHO FIRME": 2,
+  "Tinta Ciano": 3,
+  "Tinta Magenta": 3,
+  "Tinta Amarelo": 3,
+  "Tinta Preto": 3,
+  "Papel Condelhove 1,80m": 11,
+  "Papel Condelhove 1,60m": 4,
+  "Papel Seda 40g": 4
+};
+
 function montarInterface(dataFromFirebase) {
   const container = document.getElementById("categories");
   container.innerHTML = "";
@@ -62,7 +81,6 @@ function montarInterface(dataFromFirebase) {
 
     cat.items.forEach(itemName => {
       const li = document.createElement("li");
-
       const span = document.createElement("span");
       span.textContent = itemName;
 
@@ -79,16 +97,12 @@ function montarInterface(dataFromFirebase) {
       input.dataset.cat = key;
       input.dataset.item = itemName;
 
-      const minimo = estoqueMinimo[itemName.toUpperCase()] || estoqueMinimo[itemName] || 0;
-      if (qty < minimo) li.classList.add("low-stock");
-
-      input.oninput = () => {
-        if (parseInt(input.value) < minimo) {
-          li.classList.add("low-stock");
-        } else {
-          li.classList.remove("low-stock");
-        }
-      };
+      // Verifica estoque mínimo
+      const minimo = estoqueMinimo[itemName.toUpperCase()] || estoqueMinimo[itemName];
+      if (minimo !== undefined && qty < minimo) {
+        li.style.backgroundColor = "#ffe5e5";
+        li.title = `Estoque mínimo recomendado: ${minimo}`;
+      }
 
       li.appendChild(span);
       li.appendChild(input);
@@ -106,26 +120,27 @@ function montarInterface(dataFromFirebase) {
   }
 }
 
-// Salvar categoria
 function salvarCategoria(catKey, divCat) {
   const inputs = divCat.querySelectorAll("input.qty-input");
   const updates = {};
   inputs.forEach(input => {
     const item = input.dataset.item;
-    updates[item] = parseInt(input.value) || 0;
+    const value = parseInt(input.value);
+    updates[item] = value >= 0 ? value : 0;
   });
 
-  database.ref(catKey).set(updates)
+  firebase.database().ref(catKey).set(updates)
     .then(() => alert(`Estoque da categoria ${categories[catKey].name} salvo com sucesso!`))
     .catch(err => alert("Erro ao salvar no Firebase: " + err));
 }
 
-// Carregar dados
 function carregarDados() {
-  database.ref().once("value")
-    .then(snapshot => montarInterface(snapshot.val()))
+  firebase.database().ref().once("value")
+    .then(snapshot => {
+      montarInterface(snapshot.val());
+    })
     .catch(err => {
-      alert("Erro ao carregar dados: " + err);
+      alert("Erro ao carregar dados do Firebase: " + err);
       montarInterface(null);
     });
 }
