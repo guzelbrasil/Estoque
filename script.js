@@ -13,8 +13,8 @@ firebase.initializeApp(firebaseConfig);
 const database = firebase.database();
 
 const malhas = [
-  "HELANCA", "DRY 180 PLUS EF", "DRY SOFT", "JIMP DRY", "MANCHESTER", "ABSTRACT",
-  "ACTION", "GABARDINE", "CHIMPA", "FURADINHO", "NBA", "NBA (FURADINHO)", "OXFORD",
+  "HELANCA", "DRY 180 PLUS EF", "DRY SOFT", "JIMP DRY", "JIMP DRY 1,60", "MANCHESTER", "ABSTRACT",
+  "ACTION", "GABARDINE", "CHIMPA", "HELANCA FLANELADA", "FURADINHO", "NBA", "NBA (FURADINHO)", "OXFORD", "DRY UV ETX", "DRY 100 ETX",
   "OXFORDINE", "QUADRADINHO", "BORA BORA", "PUNHO DRY", "PUNHO FIRME", "PP 100% POLY"
 ];
 
@@ -66,12 +66,16 @@ const estoqueMinimo = {
   "PUNHO DRY": 4,
   "PUNHO FIRME": 2,
   "PP 100% POLY": 1,
+  "Tinta Ciano": 3,
+  "Tinta Magenta": 3,
+  "Tinta Amarelo": 3,
+  "Tinta Preto": 3,
   "Papel Coldenhove 1,80m": 10,
   "Papel Coldenhove 1,60m": 3,
   "Papel Seda 40g": 3,
   "Papel Wiprime": 10,
   "Papel Kraft 1,80": 3,
-  "Papel Kraft 1,60": 3
+  "Papel Kraft 1,60": 1
 };
 
 function criarSubtitulo(texto) {
