@@ -57,7 +57,7 @@ const estoqueMinimo = {
   "Papel Condelhove 1,80m": 11,
   "Papel Condelhove 1,60m": 4,
   "Papel Wiprime": 4,
-  "Papel Seda 40g": 4
+  "Papel Seda 40g": 4,
   "Papel Kraft 1,80": 3
 };
 
