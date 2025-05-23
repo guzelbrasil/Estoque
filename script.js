@@ -17,7 +17,6 @@ const malhas = [
   "DRY 180 PLUS",
   "DRY 180 1,60",
   "DRY SOFT",
-  "JIMP DRY",
   "JIMP DRY 1,60",
   "MANCHESTER",
   "ABSTRACT 1,70",
@@ -93,16 +92,16 @@ const estoqueMinimo = {
   "PUNHO DRY": 4,
   "PUNHO FIRME": 2,
   "PP 100% POLY": 1,
-  "Tinta Ciano": 3,
-  "Tinta Magenta": 3,
-  "Tinta Amarelo": 3,
-  "Tinta Preto": 3,
-  "Papel Coldenhove 1,80m": 10,
-  "Papel Coldenhove 1,60m": 3,
-  "Papel Seda 40g": 3,
-  "Papel Wiprime": 10,
-  "Papel Kraft 1,80": 3,
-  "Papel Kraft 1,60": 1
+  "TINTA CIANO": 3,
+  "TINTA MAGENTA": 3,
+  "TINTA AMARELO": 3,
+  "TINTA PRETO": 3,
+  "PAPEL COLDENHOVE 1,80M": 10,
+  "PAPEL COLDENHOVE 1,60M": 3,
+  "PAPEL SEDA 40G": 3,
+  "PAPEL WIPRIME": 10,
+  "PAPEL KRAFT 1,80": 3,
+  "PAPEL KRAFT 1,60": 1
 };
 
 function criarSubtitulo(texto) {
@@ -145,13 +144,8 @@ function montarInterface(dataFromFirebase) {
       };
 
       cat.items.forEach(item => {
-        if (item.includes("ADT - KANXA")) grupos["ADT - KANXA"].push(item);
-        else if (item.includes("JUV - KANXA")) grupos["JUV - KANXA"].push(item);
-        else if (item.includes("INF - KANXA")) grupos["INF - KANXA"].push(item);
-        else if (item.includes("ADT - FINTA")) grupos["ADT - FINTA"].push(item);
-        else if (item.includes("JUV - FINTA")) grupos["JUV - FINTA"].push(item);
-        else if (item.includes("INF - FINTA")) grupos["INF - FINTA"].push(item);
-        else grupos.OUTROS.push(item);
+        const prefixo = Object.keys(grupos).find(grupo => item.startsWith(grupo)) || "OUTROS";
+        grupos[prefixo].push(item);
       });
 
       for (const grupo in grupos) {
@@ -175,7 +169,7 @@ function montarInterface(dataFromFirebase) {
             input.dataset.cat = key;
             input.dataset.item = itemName;
 
-            const minimo = estoqueMinimo[itemName.toUpperCase()] || estoqueMinimo[itemName];
+            const minimo = estoqueMinimo[itemName.toUpperCase()];
             if (minimo !== undefined && qty < minimo) {
               li.style.backgroundColor = "#ffe5e5";
               li.title = `Estoque mínimo recomendado: ${minimo}`;
@@ -207,7 +201,7 @@ function montarInterface(dataFromFirebase) {
         input.dataset.cat = key;
         input.dataset.item = itemName;
 
-        const minimo = estoqueMinimo[itemName.toUpperCase()] || estoqueMinimo[itemName];
+        const minimo = estoqueMinimo[itemName.toUpperCase()];
         if (minimo !== undefined && qty < minimo) {
           li.style.backgroundColor = "#ffe5e5";
           li.title = `Estoque mínimo recomendado: ${minimo}`;
