@@ -13,30 +13,10 @@ firebase.initializeApp(firebaseConfig);
 const database = firebase.database();
 
 const malhas = [
-  "HELANCA",
-  "DRY 180 PLUS",
-  "DRY 180 1,60",
-  "DRY SOFT",
-  "JIMP DRY",
-  "JIMP DRY 1,60",
-  "MANCHESTER",
-  "ABSTRACT 1,70",
-  "ACTION",
-  "GABARDINE 1,50",
-  "CHIMPA 1,60",
-  "HELANCA FLANELADA 1,50",
-  "FURADINHO 1,75",
-  "NBA 1,60",
-  "NBA (FURADINHO) 1,40",
-  "OXFORD 1,40",
-  "DRY UV 1,60",
-  "DRY 100",
-  "OXFORDINE 1,40",
-  "QUADRADINHO 1,40",
-  "BORA BORA 1,60",
-  "PUNHO DRY",
-  "PUNHO FIRME",
-  "PP 100% POLY"
+  "HELANCA", "DRY 180 PLUS", "DRY 180 1,60", "DRY SOFT", "JIMP DRY", "JIMP DRY 1,60",
+  "MANCHESTER", "ABSTRACT 1,70", "ACTION", "GABARDINE 1,50", "CHIMPA 1,60", "HELANCA FLANELADA 1,50",
+  "FURADINHO 1,75", "NBA 1,60", "NBA (FURADINHO) 1,40", "OXFORD 1,40", "DRY UV 1,60", "DRY 100",
+  "OXFORDINE 1,40", "QUADRADINHO 1,40", "BORA BORA 1,60", "PUNHO DRY", "PUNHO FIRME", "PP 100% POLY"
 ];
 
 const meioes = [
@@ -56,10 +36,7 @@ const meioes = [
 
 const categories = {
   malhas: { name: "Malhas", items: malhas },
-  tintas: {
-    name: "Tintas",
-    items: ["Tinta Ciano", "Tinta Magenta", "Tinta Amarelo", "Tinta Preto"]
-  },
+  tintas: { name: "Tintas", items: ["Tinta Ciano", "Tinta Magenta", "Tinta Amarelo", "Tinta Preto"] },
   papeis: {
     name: "Papéis",
     items: [
@@ -68,41 +45,17 @@ const categories = {
       "Papel Kraft 1,80", "Papel Kraft 1,60"
     ]
   },
-  meioes: {
-    name: "Meiões",
-    items: meioes
-  }
+  meioes: { name: "Meiões", items: meioes }
 };
 
 const estoqueMinimo = {
-  "HELANCA": 6,
-  "DRY SOFT": 12,
-  "JIMP DRY": 17,
-  "MANCHESTER": 3,
-  "ABSTRACT 1,70": 3,
-  "ACTION": 3,
-  "GABARDINE 1,50": 1,
-  "CHIMPA 1,60": 3,
-  "FURADINHO 1,75": 2,
-  "NBA 1,60": 1,
-  "NBA (FURADINHO) 1,40": 1,
-  "OXFORD 1,40": 1,
-  "OXFORDINE 1,40": 1,
-  "QUADRADINHO 1,40": 3,
-  "BORA BORA 1,60": 1,
-  "PUNHO DRY": 4,
-  "PUNHO FIRME": 2,
-  "PP 100% POLY": 1,
-  "TINTA CIANO": 3,
-  "TINTA MAGENTA": 3,
-  "TINTA AMARELO": 3,
-  "TINTA PRETO": 3,
-  "PAPEL COLDENHOVE 1,80M": 10,
-  "PAPEL COLDENHOVE 1,60M": 3,
-  "PAPEL SEDA 40G": 3,
-  "PAPEL WIPRIME": 10,
-  "PAPEL KRAFT 1,80": 3,
-  "PAPEL KRAFT 1,60": 1
+  "HELANCA": 6, "DRY SOFT": 12, "JIMP DRY": 17, "MANCHESTER": 3, "ABSTRACT 1,70": 3,
+  "ACTION": 3, "GABARDINE 1,50": 1, "CHIMPA 1,60": 3, "FURADINHO 1,75": 2, "NBA 1,60": 1,
+  "NBA (FURADINHO) 1,40": 1, "OXFORD 1,40": 1, "OXFORDINE 1,40": 1, "QUADRADINHO 1,40": 3,
+  "BORA BORA 1,60": 1, "PUNHO DRY": 4, "PUNHO FIRME": 2, "PP 100% POLY": 1,
+  "TINTA CIANO": 3, "TINTA MAGENTA": 3, "TINTA AMARELO": 3, "TINTA PRETO": 3,
+  "PAPEL COLDENHOVE 1,80M": 10, "PAPEL COLDENHOVE 1,60M": 3, "PAPEL SEDA 40G": 3,
+  "PAPEL WIPRIME": 10, "PAPEL KRAFT 1,80": 3, "PAPEL KRAFT 1,60": 1
 };
 
 function criarSubtitulo(texto) {
@@ -138,79 +91,27 @@ function montarInterface(dataFromFirebase) {
     ul.classList.add("items");
 
     if (key === "meioes") {
+      // Agrupa meiões por prefixo e cria subtítulos
       const grupos = {
         "ADT - KANXA": [], "JUV - KANXA": [], "INF - KANXA": [],
         "ADT - FINTA": [], "JUV - FINTA": [], "INF - FINTA": [],
         OUTROS: []
       };
-
       cat.items.forEach(item => {
         const prefixo = Object.keys(grupos).find(grupo => item.startsWith(grupo)) || "OUTROS";
         grupos[prefixo].push(item);
       });
-
       for (const grupo in grupos) {
         if (grupos[grupo].length > 0) {
           ul.appendChild(criarSubtitulo(grupo));
           grupos[grupo].forEach(itemName => {
-            const li = document.createElement("li");
-            const span = document.createElement("span");
-            span.textContent = itemName;
-
-            let qty = 0;
-            if (dataFromFirebase?.[key]?.[itemName] !== undefined) {
-              qty = dataFromFirebase[key][itemName];
-            }
-
-            const input = document.createElement("input");
-            input.type = "number";
-            input.min = 0;
-            input.value = qty;
-            input.classList.add("qty-input");
-            input.dataset.cat = key;
-            input.dataset.item = itemName;
-
-            const minimo = estoqueMinimo[itemName.toUpperCase()];
-            if (minimo !== undefined && qty < minimo) {
-              li.style.backgroundColor = "#ffe5e5";
-              li.title = `Estoque mínimo recomendado: ${minimo}`;
-            }
-
-            li.appendChild(span);
-            li.appendChild(input);
-            ul.appendChild(li);
+            ul.appendChild(criarItem(key, itemName, dataFromFirebase));
           });
         }
       }
-
     } else {
       cat.items.forEach(itemName => {
-        const li = document.createElement("li");
-        const span = document.createElement("span");
-        span.textContent = itemName;
-
-        let qty = 0;
-        if (dataFromFirebase?.[key]?.[itemName] !== undefined) {
-          qty = dataFromFirebase[key][itemName];
-        }
-
-        const input = document.createElement("input");
-        input.type = "number";
-        input.min = 0;
-        input.value = qty;
-        input.classList.add("qty-input");
-        input.dataset.cat = key;
-        input.dataset.item = itemName;
-
-        const minimo = estoqueMinimo[itemName.toUpperCase()];
-        if (minimo !== undefined && qty < minimo) {
-          li.style.backgroundColor = "#ffe5e5";
-          li.title = `Estoque mínimo recomendado: ${minimo}`;
-        }
-
-        li.appendChild(span);
-        li.appendChild(input);
-        ul.appendChild(li);
+        ul.appendChild(criarItem(key, itemName, dataFromFirebase));
       });
     }
 
@@ -225,29 +126,72 @@ function montarInterface(dataFromFirebase) {
   }
 }
 
-function salvarCategoria(catKey, divCat) {
+function criarItem(categoria, nomeItem, dataFromFirebase) {
+  const li = document.createElement("li");
+  li.classList.add("item");
+
+  const spanNome = document.createElement("span");
+  spanNome.textContent = nomeItem;
+
+  const inputQty = document.createElement("input");
+  inputQty.type = "number";
+  inputQty.min = 0;
+  inputQty.classList.add("qty-input");
+
+  // Busca valor no Firebase
+  let valorFirebase = 0;
+  if (dataFromFirebase && dataFromFirebase[categoria] && dataFromFirebase[categoria][nomeItem] !== undefined) {
+    valorFirebase = dataFromFirebase[categoria][nomeItem];
+  }
+  inputQty.value = valorFirebase;
+
+  // Alerta estoque mínimo
+  const estoqueMin = estoqueMinimo[nomeItem.toUpperCase()] ?? 0;
+  if (estoqueMin > 0 && Number(inputQty.value) < estoqueMin) {
+    inputQty.classList.add("below-min");
+  }
+
+  li.appendChild(spanNome);
+  li.appendChild(inputQty);
+  return li;
+}
+
+function salvarCategoria(categoriaKey, divCat) {
   const inputs = divCat.querySelectorAll("input.qty-input");
   const updates = {};
   inputs.forEach(input => {
-    const item = input.dataset.item;
-    const value = parseInt(input.value);
-    updates[item] = value >= 0 ? value : 0;
+    const nomeItem = input.previousSibling.textContent;
+    let valor = Number(input.value);
+    if (isNaN(valor) || valor < 0) valor = 0;
+    updates[`${categoriaKey}/${nomeItem}`] = valor;
   });
 
-  firebase.database().ref(catKey).set(updates)
-    .then(() => alert(`Estoque da categoria ${categories[catKey].name} salvo com sucesso!`))
-    .catch(err => alert("Erro ao salvar no Firebase: " + err));
-}
-
-function carregarDados() {
-  firebase.database().ref().once("value")
-    .then(snapshot => {
-      montarInterface(snapshot.val());
+  database.ref().update(updates)
+    .then(() => {
+      alert(`Estoque da categoria "${categories[categoriaKey].name}" salvo com sucesso!`);
+      atualizarAlertas();
     })
-    .catch(err => {
-      alert("Erro ao carregar dados do Firebase: " + err);
-      montarInterface(null);
-    });
+    .catch(err => alert("Erro ao salvar estoque: " + err.message));
 }
 
-window.onload = carregarDados;
+function atualizarAlertas() {
+  const allInputs = document.querySelectorAll("input.qty-input");
+  allInputs.forEach(input => {
+    const nomeItem = input.previousSibling.textContent;
+    const min = estoqueMinimo[nomeItem.toUpperCase()] ?? 0;
+    if (min > 0 && Number(input.value) < min) {
+      input.classList.add("below-min");
+    } else {
+      input.classList.remove("below-min");
+    }
+  });
+}
+
+function iniciar() {
+  database.ref().on("value", snapshot => {
+    const dados = snapshot.val() || {};
+    montarInterface(dados);
+  });
+}
+
+window.onload = iniciar;
