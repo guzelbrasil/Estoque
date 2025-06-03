@@ -7,6 +7,20 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700&display=swap" rel="stylesheet">
   <link rel="icon" href="img/logo.png" type="image/png" />
   <link rel="stylesheet" href="style.css">
+  <style>
+    header {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+    .logo {
+      max-width: 120px;
+      margin-bottom: 12px;
+    }
+    h1 {
+      font-size: 2rem;
+      color: #222;
+    }
+  </style>
 </head>
 <body>
   <header>
@@ -14,9 +28,7 @@
     <h1>Controle de Estoque</h1>
   </header>
 
-  <div class="container">
-    <div id="categories"></div>
-  </div>
+  <div id="estoque"></div>
 
   <!-- Firebase -->
   <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>

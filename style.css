@@ -15,67 +15,55 @@ body {
   justify-content: center;
 }
 
-#categories {
+#estoque {
   max-width: 960px;
   width: 100%;
   display: flex;
-  flex-wrap: wrap;
-  gap: 24px;
-  justify-content: center;
+  flex-direction: column;
+  gap: 32px;
 }
 
-/* Cada categoria com sombra e borda arredondada */
-.category {
+/* Cada categoria */
+.categoria {
   background: #fff;
   border-radius: 12px;
-  box-shadow: 0 3px 8px rgb(0 0 0 / 0.1);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
   padding: 20px;
-  width: 450px;
-  display: flex;
-  flex-direction: column;
 }
 
-.category h2 {
+.categoria h2 {
   font-size: 1.8rem;
   margin-bottom: 16px;
-  cursor: pointer;
-  user-select: none;
   color: #222;
-  border-bottom: 2px solid transparent;
-  transition: border-color 0.25s ease;
 }
 
-.category h2:hover {
-  border-color: #007bff;
+/* Subtítulo (ex: ADT, JUV, INF nos meiões) */
+.subtitulo {
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin: 12px 0 4px;
+  color: #555;
+  background: #e3e8f0;
+  padding: 6px 12px;
+  border-radius: 6px;
 }
 
-.items {
-  display: grid;
-  grid-template-columns: 1fr 60px;
-  gap: 12px 12px;
-  list-style: none;
-  margin-bottom: 12px;
-}
-
+/* Itens */
 .item {
-  display: contents; /* Para alinhar item e input na grid */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 8px 0;
 }
 
-.item > span {
-  align-self: center;
+.item span {
   font-weight: 600;
   font-size: 1rem;
-  cursor: pointer;
   color: #444;
-  transition: color 0.2s ease;
 }
 
-.item > span:hover {
-  color: #007bff;
-}
-
-.qty-input {
-  width: 100%;
+.item input {
+  width: 80px;
   padding: 6px 10px;
   font-size: 1rem;
   border: 2px solid #ccc;
@@ -83,29 +71,20 @@ body {
   transition: border-color 0.3s ease;
 }
 
-.qty-input:focus {
+.item input:focus {
   border-color: #007bff;
   outline: none;
 }
 
-.qty-input[title] {
+/* Alerta visual para itens abaixo do mínimo */
+.input-alerta {
   border-color: #e63946 !important;
   background-color: #ffe6e6;
 }
 
-/* Subtítulo para meiões */
-.items > li[style*="font-weight: bold"] {
-  font-size: 1.15rem !important;
-  color: #555 !important;
-  background: #e3e8f0 !important;
-  border-radius: 6px !important;
-  padding: 8px 12px !important;
-  grid-column: 1 / -1 !important;
-  user-select: none;
-}
-
-/* Botões */
-.save-btn {
+/* Botão salvar */
+.btn-salvar {
+  margin-top: 16px;
   padding: 10px 20px;
   background-color: #007bff;
   color: white;
@@ -114,30 +93,24 @@ body {
   cursor: pointer;
   font-weight: 700;
   font-size: 1.1rem;
-  align-self: flex-start;
   transition: background-color 0.3s ease;
 }
 
-.save-btn:hover {
+.btn-salvar:hover {
   background-color: #0056b3;
 }
 
 /* Responsividade */
-@media (max-width: 1024px) {
-  #categories {
-    justify-content: center;
+@media (max-width: 768px) {
+  #estoque {
+    padding: 10px;
   }
-  .category {
+  .item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+  .item input {
     width: 100%;
-    max-width: 480px;
-  }
-}
-
-@media (max-width: 600px) {
-  .items {
-    grid-template-columns: 1fr 1fr;
-  }
-  .qty-input {
-    width: 90%;
   }
 }
