@@ -1,118 +1,96 @@
-/* Reset básico */
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
 body {
-  background: #f7f9fc;
+  font-family: 'Poppins', sans-serif;
+  background-color: #f9f9f9;
+  margin: 0;
+  padding: 0 16px;
+}
+
+h2 {
+  margin: 0;
+  font-size: 1.2rem;
   color: #333;
-  padding: 20px;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  align-items: center;
+  cursor: pointer;
 }
 
-#estoque {
-  max-width: 960px;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 32px;
-}
-
-/* Cada categoria */
-.categoria {
-  background: #fff;
+.category {
+  background-color: #fff;
+  padding: 16px;
+  margin-bottom: 24px;
   border-radius: 12px;
-  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
-  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
-.categoria h2 {
-  font-size: 1.8rem;
-  margin-bottom: 16px;
-  color: #222;
+ul.items {
+  list-style: none;
+  padding: 0;
+  margin: 16px 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 12px;
 }
 
-/* Subtítulo (ex: ADT, JUV, INF nos meiões) */
-.subtitulo {
-  font-size: 1.1rem;
-  font-weight: bold;
-  margin: 12px 0 4px;
-  color: #555;
-  background: #e3e8f0;
-  padding: 6px 12px;
-  border-radius: 6px;
-}
-
-/* Itens */
 .item {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 8px 0;
+  padding: 10px 14px;
+  background-color: #f1f1f1;
+  border-radius: 8px;
 }
 
 .item span {
-  font-weight: 600;
-  font-size: 1rem;
-  color: #444;
+  font-size: 0.95rem;
+  color: #333;
+  flex: 1;
+  margin-right: 10px;
 }
 
-.item input {
-  width: 80px;
-  padding: 6px 10px;
-  font-size: 1rem;
-  border: 2px solid #ccc;
-  border-radius: 8px;
-  transition: border-color 0.3s ease;
+.qty-input {
+  width: 60px;
+  padding: 6px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  text-align: center;
+  font-weight: 500;
+  font-size: 0.95rem;
 }
 
-.item input:focus {
-  border-color: #007bff;
-  outline: none;
+.below-min {
+  border-color: red;
+  background-color: #ffe5e5;
+  color: #b00000;
+  font-weight: bold;
 }
 
-/* Alerta visual para itens abaixo do mínimo */
-.input-alerta {
-  border-color: #e63946 !important;
-  background-color: #ffe6e6;
-}
-
-/* Botão salvar */
-.btn-salvar {
-  margin-top: 16px;
-  padding: 10px 20px;
-  background-color: #007bff;
+.save-btn {
+  display: block;
+  margin: 8px auto 0;
+  padding: 8px 20px;
+  background-color: #1e88e5;
   color: white;
   border: none;
-  border-radius: 10px;
+  border-radius: 8px;
+  font-weight: 500;
   cursor: pointer;
-  font-weight: 700;
-  font-size: 1.1rem;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s;
 }
 
-.btn-salvar:hover {
-  background-color: #0056b3;
+.save-btn:hover {
+  background-color: #1565c0;
 }
 
-/* Responsividade */
-@media (max-width: 768px) {
-  #estoque {
-    padding: 10px;
+@media (max-width: 600px) {
+  ul.items {
+    grid-template-columns: 1fr;
   }
+
   .item {
     flex-direction: column;
     align-items: flex-start;
-    gap: 6px;
   }
-  .item input {
+
+  .qty-input {
     width: 100%;
+    margin-top: 6px;
   }
 }
