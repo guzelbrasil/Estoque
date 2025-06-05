@@ -34,13 +34,14 @@ h2 {
   cursor: pointer;
 }
 
-
 .category {
   background-color: #fff;
   padding: 16px;
   margin-bottom: 24px;
   border-radius: 12px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  width: 100%; /* Garante que a categoria ocupe a largura total */
+  max-width: 900px; /* Limita a largura máxima para alinhamento */
 }
 
 ul.items {
@@ -48,7 +49,10 @@ ul.items {
   padding: 0;
   margin: 16px 0;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  /* `repeat(auto-fit, minmax(240px, 1fr))` já é excelente para adaptar o número de colunas! */
+  /* Com esse setup, ele vai criar o máximo de colunas que puder, com no mínimo 240px cada. */
+  /* Se você quer *exatamente* 3 colunas no desktop e mais em telas maiores, ou menos em telas menores, podemos refinar. */
+  /* Por enquanto, vamos manter o seu `auto-fit` que já é muito bom para responsividade. */
   gap: 12px;
 }
 
@@ -102,18 +106,17 @@ ul.items {
   background-color: #165c61;
 }
 
-@media (max-width: 600px) {
-  ul.items {
-    grid-template-columns: 1fr;
-  }
+/* --- */
 
-  .item {
-    flex-direction: column;
-    align-items: flex-start;
-  }
+## Ajustes para Layout de Colunas em Desktop
 
-  .qty-input {
-    width: 100%;
-    margin-top: 6px;
-  }
+A sua regra `ul.items { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }` já é *excelente* e faz a página ser muito responsiva. Ela automaticamente cria o **máximo de colunas que cabem**, cada uma com no mínimo 240px, e distribui o espaço igualmente. Isso significa que, em um desktop, você já deve ver 3 ou mais colunas, dependendo da largura da tela.
+
+No entanto, se você deseja **fixar em 3 colunas** *apenas* em telas maiores e garantir que não tenha mais do que isso (mesmo que caibam 4 ou 5), podemos adicionar uma media query específica:
+
+```css
+@media (min-width: 992px) { /* Por exemplo, a partir de 992px de largura (telas de laptop grandes e desktops) */
+    ul.items {
+        grid-template-columns: repeat(3, 1fr); /* Fixa em 3 colunas de largura igual */
+    }
 }
